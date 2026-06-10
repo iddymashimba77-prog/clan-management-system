@@ -3,39 +3,66 @@
     <ul>
 
         <li>
-            <a href="#">Dashboard</a>
+            <a href="#">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
         </li>
 
         <li>
-            <a href="#">Family Members</a>
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+                Family Members
+            </a>
         </li>
 
         <li>
-            <a href="#">Family Tree</a>
+            <a href="#">
+                <i class="fa-solid fa-tree"></i>
+                Family Tree
+            </a>
         </li>
 
         <li>
-            <a href="#">Contributions</a>
+            <a href="#">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                Contributions
+            </a>
         </li>
 
         <li>
-            <a href="#">Events</a>
+            <a href="#">
+                <i class="fa-solid fa-calendar-days"></i>
+                Events
+            </a>
         </li>
 
         <li>
-            <a href="#">Messages</a>
+            <a href="#">
+                <i class="fa-solid fa-envelope"></i>
+                Messages
+            </a>
         </li>
 
         <li>
-            <a href="#">Reports</a>
+            <a href="#">
+                <i class="fa-solid fa-chart-column"></i>
+                Reports
+            </a>
         </li>
 
         <li>
-            <a href="#">Settings</a>
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
         </li>
 
         <li>
-            <a href="../logout.php">Logout</a>
+            <a href="../logout.php">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
         </li>
 
     </ul>
