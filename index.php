@@ -289,3 +289,78 @@ require_once 'config/constants.php';
     </div>
 
 </section>
+
+
+<!-- ===========================
+     UPCOMING EVENTS
+=========================== -->
+
+<section class="events-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Upcoming Events</h2>
+
+            <p>
+                Stay informed about our upcoming family activities and gatherings.
+            </p>
+
+        </div>
+
+        <div class="events-grid">
+
+            <div class="event-card">
+
+                <div class="event-date">
+
+                    15 JUL
+
+                </div>
+
+                <h3>Family Meeting</h3>
+
+                <p>
+                    Annual family gathering and discussion.
+                </p>
+
+            </div>
+
+            <div class="event-card">
+
+                <div class="event-date">
+
+                    20 AUG
+
+                </div>
+
+                <h3>Wedding Ceremony</h3>
+
+                <p>
+                    Join us in celebrating a family wedding.
+                </p>
+
+            </div>
+
+            <div class="event-card">
+
+                <div class="event-date">
+
+                    05 SEP
+
+                </div>
+
+                <h3>Family Development Day</h3>
+
+                <p>
+                    Community development and networking event.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
