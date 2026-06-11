@@ -6,4 +6,24 @@
 
     }
 
+    .hero-content h1{
+
+        font-size:35px;
+
+    }
+
+    .hero-content p{
+
+        font-size:18px;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
 }
