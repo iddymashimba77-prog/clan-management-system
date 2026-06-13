@@ -364,3 +364,53 @@ require_once 'config/constants.php';
     </div>
 
 </section>
+
+<!-- ===========================
+     GALLERY SECTION
+=========================== -->
+
+<section class="gallery-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Family Gallery</h2>
+
+            <p>
+                Memories that keep our family connected across generations.
+            </p>
+
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+            <div class="gallery-card">
+                <i class="fa-solid fa-image"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
