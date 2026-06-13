@@ -414,3 +414,59 @@ require_once 'config/constants.php';
     </div>
 
 </section>
+
+<!-- ===========================
+     CONTACT SECTION
+=========================== -->
+
+<section class="contact-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                Get in touch with our family leadership team.
+            </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <h3>Phone</h3>
+
+                <p>+255 XXX XXX XXX</p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <h3>Email</h3>
+
+                <p>info@clan.com</p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <h3>Address</h3>
+
+                <p>Tanzania</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

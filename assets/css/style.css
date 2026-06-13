@@ -712,3 +712,95 @@ ul{
     color:var(--primary-color);
 
 }
+
+/* ===================================
+   CONTACT SECTION
+=================================== */
+
+.contact-section{
+
+    padding:100px 0;
+
+    background:var(--background-color);
+
+}
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+}
+
+.contact-card{
+
+    background:#ffffff;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.contact-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.contact-card i{
+
+    font-size:45px;
+
+    color:var(--primary-color);
+
+    margin-bottom:20px;
+
+}
+
+.contact-card h3{
+
+    margin-bottom:15px;
+
+}
+
+.contact-card p{
+
+    color:var(--text-light);
+
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.main-footer{
+
+    background:#111827;
+
+    color:#ffffff;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+}
+
+.footer-content p{
+
+    margin:0;
+
+    color:#d1d5db;
+
+}
