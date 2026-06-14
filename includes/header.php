@@ -23,7 +23,39 @@ require_once __DIR__ . '/../config/constants.php';
 
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/navbar.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/hero.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/about.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/statistics.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/leadership.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/family-tree.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/events.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/gallery.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/contact.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/footer.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/buttons.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/forms.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/tables.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/cards.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dashboard.css">
+
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/responsive.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/login.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
