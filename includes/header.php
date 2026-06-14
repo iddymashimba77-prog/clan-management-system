@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../config/language.php';
 
 require_once __DIR__ . '/../config/constants.php';
+
 ?>
 
 <!DOCTYPE html>
