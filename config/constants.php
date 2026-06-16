@@ -44,3 +44,4 @@ define('ROLE_CHAIRPERSON', 1);
 define('ROLE_SECRETARY', 2);
 define('ROLE_TREASURER', 3);
 define('ROLE_MEMBER', 4);
+

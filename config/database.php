@@ -40,3 +40,7 @@ class Database
         return $this->connection;
     }
 }
+
+$database = new Database();
+
+$pdo = $database->connect();
