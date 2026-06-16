@@ -12,39 +12,21 @@ if (!hasRole(ROLE_CHAIRPERSON)) {
     exit;
 }
 
+include 'includes/header.php';
+include 'includes/navbar.php';
+include 'includes/sidebar.php';
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<div class="main-content">
 
-<head>
+    <h1>Dashboard</h1>
 
-    <meta charset="UTF-8">
-
-    <title>Chairperson Dashboard</title>
-
-</head>
-
-<body>
-
-    <h1>Welcome <?= htmlspecialchars($_SESSION['full_name']); ?></h1>
-
-    <hr>
-
-    <p>Member Code:
-        <?= htmlspecialchars($_SESSION['member_code']); ?>
+    <p>
+        Welcome,
+        <?= htmlspecialchars($_SESSION['full_name']); ?>
     </p>
 
-    <p>Role:
-        <?= htmlspecialchars((string) $_SESSION['role_id']); ?>
-    </p>
+</div>
 
-    <br>
-
-    <a href="../logout.php">
-        Logout
-    </a>
-
-</body>
-
-</html>
+<?php include 'includes/footer.php'; ?>
