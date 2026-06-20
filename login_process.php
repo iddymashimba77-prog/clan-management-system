@@ -153,7 +153,7 @@ if (!password_verify($password, $user['password_hash'])) {
 |--------------------------------------------------------------------------
 */
 
-/* session_regenerate_id(true);
+session_regenerate_id(true);
 
 $_SESSION['user_id'] = $user['user_id'];
 
@@ -175,7 +175,7 @@ $_SESSION['full_name'] =
     print_r($_SESSION);
 
     echo "</pre>";
-    */
+    
     
     switch ($user['role_id']) {
 

@@ -25,7 +25,7 @@ function requireLogin(): void
 {
     if (!isLoggedIn()) {
 
-        header("Location: ../login.php");
+        header("Location: /Clan_Management_System/login.php");
 
         exit;
     }

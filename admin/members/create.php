@@ -3,10 +3,11 @@
 require_once '../../config/constants.php';
 require_once '../../config/auth.php';
 
+
 requireLogin();
 
 if (!hasRole(ROLE_CHAIRPERSON)) {
-    header("Location: ../../login.php");
+    header("Location: /Clan_Management_System/login.php");
     exit;
 }
 
@@ -56,11 +57,24 @@ if (!hasRole(ROLE_CHAIRPERSON)) {
         <label>Email</label><br>
         <input type="email" name="email"><br><br>
 
-        <label>Occupation</label><br>
-        <input type="text" name="occupation"><br><br>
-
         <label>Birth Place</label><br>
         <input type="text" name="birth_place"><br><br>
+
+        <label>Marital Status</label><br>
+
+    <select name="marital_status">
+
+        <option value="Single">Single</option>
+
+        <option value="Married">Married</option>
+
+        <option value="Divorced">Divorced</option>
+
+        <option value="Widowed">Widowed</option>
+
+    </select>
+
+    <br><br>
 
         <label>Current Residence</label><br>
         <input type="text" name="current_residence"><br><br>
