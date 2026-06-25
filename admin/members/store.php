@@ -1,5 +1,9 @@
 <?php
 
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once '../../config/database.php';
 require_once '../../config/constants.php';
 require_once '../../config/auth.php';
@@ -60,6 +64,17 @@ $birth_place = trim($_POST['birth_place'] ?? '');
 $marital_status = $_POST['marital_status'] ?? 'Single';
 $current_residence = trim($_POST['current_residence'] ?? '');
 $biography = trim($_POST['biography'] ?? '');
+$father_user_id = !empty($_POST['father_user_id'])
+    ? $_POST['father_user_id']
+    : null;
+
+$mother_user_id = !empty($_POST['mother_user_id'])
+    ? $_POST['mother_user_id']
+    : null;
+
+$spouse_user_id = !empty($_POST['spouse_user_id'])
+    ? $_POST['spouse_user_id']
+    : null;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +99,10 @@ INSERT INTO users
     biography,
     role_id,
     account_status,
-    created_by_user_id
+    created_by_user_id,
+    father_user_id,
+    mother_user_id,
+    spouse_user_id
 )
 VALUES
 (
@@ -102,7 +120,10 @@ VALUES
     :biography,
     :role_id,
     :account_status,
-    :created_by_user_id
+    :created_by_user_id,
+    :father_user_id,
+    :mother_user_id,
+    :spouse_user_id
 )
 ";
 
@@ -128,8 +149,12 @@ $stmt->execute([
 
     ':account_status' => 'active',
 
-    ':created_by_user_id' => $_SESSION['user_id']
+    ':created_by_user_id' => $_SESSION['user_id'],
+    ':father_user_id' => $father_user_id,
+    ':mother_user_id' => $mother_user_id,
+    ':spouse_user_id' => $spouse_user_id
 
 ]);
 
 echo "Member Registered Successfully";
+

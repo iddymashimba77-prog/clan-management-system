@@ -1,5 +1,10 @@
 <?php
 
+require_once '../../config/database.php';
+
+$database = new Database();
+$pdo = $database->connect();
+
 require_once '../../config/constants.php';
 require_once '../../config/auth.php';
 
@@ -73,6 +78,99 @@ if (!hasRole(ROLE_CHAIRPERSON)) {
         <option value="Widowed">Widowed</option>
 
     </select>
+
+    <label>Father</label><br>
+
+<select name="father_user_id">
+
+    <option value="">Select Father</option>
+
+    <?php
+    $stmt = $pdo->query("
+        SELECT user_id, first_name, last_name, member_code
+        FROM users
+        WHERE is_deleted = 0
+        ORDER BY first_name ASC
+    ");
+
+    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
+    ?>
+
+        <option value="<?= $person['user_id']; ?>">
+            <?= htmlspecialchars(
+                $person['member_code'] . ' - ' .
+                $person['first_name'] . ' ' .
+                $person['last_name']
+            ); ?>
+        </option>
+
+    <?php endwhile; ?>
+
+</select>
+
+<br><br>
+
+<label>Mother</label><br>
+
+<select name="mother_user_id">
+
+    <option value="">Select Mother</option>
+
+    <?php
+    $stmt = $pdo->query("
+        SELECT user_id, first_name, last_name, member_code
+        FROM users
+        WHERE is_deleted = 0
+        ORDER BY first_name ASC
+    ");
+
+    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
+    ?>
+
+        <option value="<?= $person['user_id']; ?>">
+            <?= htmlspecialchars(
+                $person['member_code'] . ' - ' .
+                $person['first_name'] . ' ' .
+                $person['last_name']
+            ); ?>
+        </option>
+
+    <?php endwhile; ?>
+
+</select>
+
+<br><br>
+
+<label>Spouse</label><br>
+
+<select name="spouse_user_id">
+
+    <option value="">Select Spouse</option>
+
+    <?php
+    $stmt = $pdo->query("
+        SELECT user_id, first_name, last_name, member_code
+        FROM users
+        WHERE is_deleted = 0
+        ORDER BY first_name ASC
+    ");
+
+    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
+    ?>
+
+        <option value="<?= $person['user_id']; ?>">
+            <?= htmlspecialchars(
+                $person['member_code'] . ' - ' .
+                $person['first_name'] . ' ' .
+                $person['last_name']
+            ); ?>
+        </option>
+
+    <?php endwhile; ?>
+
+</select>
+
+<br><br>
 
     <br><br>
 
