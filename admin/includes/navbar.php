@@ -1,14 +1,20 @@
-<nav class="top-navbar">
+<div class="main">
 
-    <div class="nav-left">
+<div class="navbar">
 
-        <h2><?= APP_NAME; ?></h2>
+    <div class="navbar-left">
+
+        <span class="page-title">
+            Admin Dashboard
+        </span>
 
     </div>
 
-    <div class="nav-right">
+    <div class="navbar-right">
 
         <span>
+
+            <i class="fa-solid fa-user"></i>
 
             <?= htmlspecialchars($_SESSION['full_name']); ?>
 
@@ -16,4 +22,6 @@
 
     </div>
 
-</nav>
+</div>
+
+<div class="content">

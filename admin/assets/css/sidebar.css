@@ -1,0 +1,33 @@
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#1e293b;
+    color:#fff;
+    overflow:auto;
+}
+
+.sidebar .logo{
+    padding:25px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    background:#0f172a;
+}
+
+.sidebar ul li a{
+    display:block;
+    color:#fff;
+    padding:15px 25px;
+    transition:.3s;
+}
+
+.sidebar ul li a:hover{
+    background:#2563eb;
+}
+
+.sidebar i{
+    width:25px;
+}

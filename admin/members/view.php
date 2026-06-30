@@ -1,5 +1,6 @@
 <?php
 
+require_once '../../includes/member_helper.php';
 require_once '../../config/database.php';
 require_once '../../config/constants.php';
 require_once '../../config/auth.php';
@@ -25,6 +26,10 @@ $stmt->execute([
 ]);
 
 $member = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$father = getUserById($pdo, $member['father_user_id']);
+$mother = getUserById($pdo, $member['mother_user_id']);
+$spouse = getUserById($pdo, $member['spouse_user_id']);
 
 if (!$member) {
     die('Member not found.');
@@ -66,6 +71,68 @@ if (!$member) {
 <p><strong>Current Residence:</strong> <?= htmlspecialchars($member['current_residence']); ?></p>
 
 <p><strong>Marital Status:</strong> <?= htmlspecialchars($member['marital_status']); ?></p>
+
+<hr>
+
+<p><strong>Father:</strong><br>
+
+<?php
+
+if ($father) {
+
+    echo htmlspecialchars(
+        $father['member_code'] . ' - ' . getFullName($father)
+    );
+
+} else {
+
+    echo "Not Assigned";
+
+}
+
+?>
+
+</p>
+
+<p><strong>Mother:</strong><br>
+
+<?php
+
+if ($mother) {
+
+    echo htmlspecialchars(
+        $mather['member_code'] . ' - ' . getFullName($mather)
+    );
+
+} else {
+
+    echo "Not Assigned";
+
+}
+
+?>
+
+</p>
+
+<p><strong>Spouse:</strong><br>
+
+<?php
+
+if ($spouse) {
+
+    echo htmlspecialchars(
+        $spouse['member_code'] . ' - ' . getFullName($spouse)
+    );
+
+} else {
+
+    echo "Not Assigned";
+
+}
+
+?>
+
+</p>
 
 <p><strong>Biography:</strong></p>
 
