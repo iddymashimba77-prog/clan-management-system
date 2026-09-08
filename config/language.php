@@ -1,22 +1,98 @@
 <?php
 
-if (!isset($_SESSION)) {
+/**
+ * Clan Management System
+ * Language Manager
+ */
 
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Available Languages
+|--------------------------------------------------------------------------
+*/
+
+$available_languages = [
+    'en',
+    'sw'
+];
+
+/*
+|--------------------------------------------------------------------------
+| Default Language
+|--------------------------------------------------------------------------
+*/
+
+$default_language = 'en';
+
+/*
+|--------------------------------------------------------------------------
+| Select Language
+|--------------------------------------------------------------------------
+*/
+
+if (isset($_GET['lang'])) {
+
+    $requested_language = strtolower(
+        trim($_GET['lang'])
+    );
+
+    if (in_array($requested_language, $available_languages, true)) {
+
+        $_SESSION['language'] = $requested_language;
+
+    }
 
 }
 
-if (!isset($_SESSION['language'])) {
+/*
+|--------------------------------------------------------------------------
+| Current Language
+|--------------------------------------------------------------------------
+*/
 
-    $_SESSION['language'] = 'sw';
+$current_language =
+    $_SESSION['language']
+    ?? $default_language;
+
+/*
+|--------------------------------------------------------------------------
+| Load Language File
+|--------------------------------------------------------------------------
+*/
+
+$language_file =
+    __DIR__
+    . '/../languages/'
+    . $current_language
+    . '.php';
+
+if (file_exists($language_file)) {
+
+    $translations = require $language_file;
+
+} else {
+
+    $translations = require __DIR__ . '/../languages/en.php';
 
 }
 
-$lang = require __DIR__ . '/../languages/' . $_SESSION['language'] . '.php';
+/*
+|--------------------------------------------------------------------------
+| Translation Function
+|--------------------------------------------------------------------------
+*/
 
-function lang($key)
+function __($key, $default = null)
 {
-    global $lang;
+    global $translations;
 
-    return $lang[$key] ?? $key;
+    if (isset($translations[$key])) {
+        return $translations[$key];
+    }
+
+    return $default ?? $key;
 }

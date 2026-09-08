@@ -1,29 +1,427 @@
-@media (max-width:768px){
+/* =========================================================
+   CLAN MANAGEMENT - GLOBAL RESPONSIVE OVERRIDES
+   Applies across every screen size & device (phones, tablets).
+   Loaded globally via includes/dashboard/header.php
+   ========================================================= */
 
-    .sidebar{
+/* =========================================================
+   TABLES - horizontal scroll on narrow screens
+   CSS-only safety net (also auto-wrapped by responsive.js)
+   ========================================================= */
 
-        display:none;
+.clan-system .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
+/* Fallback: if a table is not wrapped in .table-responsive,
+   make it scroll horizontally instead of breaking the layout. */
+@media (max-width: 767.98px) {
+
+    .clan-system .card .table,
+    .clan-system .content-wrapper .table,
+    .clan-system table.table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .hero-content h1{
-
-        font-size:35px;
-
+    .clan-system .card .table > thead,
+    .clan-system .card .table > tbody,
+    .clan-system .card .table > tfoot,
+    .clan-system .table-responsive > .table > thead,
+    .clan-system .table-responsive > .table > tbody {
+        display: table;
+        width: 100%;
     }
 
-    .hero-content p{
+}
 
-        font-size:18px;
+/* DataTables toolbar buttons should not overflow on phones */
+@media (max-width: 575.98px) {
 
+    .clan-system .dataTables_wrapper .dataTables_filter,
+    .clan-system .dataTables_wrapper .dataTables_length {
+        float: none;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 10px;
     }
 
-    .hero-buttons{
+    .clan-system .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+    }
 
-        flex-direction:column;
+    .clan-system .dt-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
 
-        align-items:center;
+    .clan-system .dataTables_paginate {
+        text-align: center;
+        float: none;
+        margin-top: 10px;
+    }
 
+}
+
+/* =========================================================
+   FORMS & BUTTONS - fit on small screens
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .clan-system .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .clan-system .form-control,
+    .clan-system .input-group,
+    .clan-system .select2,
+    .clan-system .select2-container {
+        max-width: 100%;
+    }
+
+    /* Stack stacked action buttons inside card-body on phones */
+    .clan-system .card-body .btn + .btn {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+
+    .clan-system .card-body .btn {
+        display: inline-block;
+        white-space: normal;
+    }
+
+    /* Make primary submit/CTA buttons easy to tap on phones */
+    .clan-system .card-body .btn-block,
+    .clan-system .card-body .btn-lg {
+        width: 100%;
+    }
+
+    /* Forms that use a grid of col-sm-* should not overflow */
+    .clan-system form .row {
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+
+    .clan-system form .row > [class*="col-"] {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+}
+
+/* =========================================================
+   STAT BOXES - guaranteed 2-per-row on small/medium devices
+   ========================================================= */
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+
+    /* If a dashboard box only has col-lg-3 (no col-sm/col-md/col-6),
+       force it to be half width so boxes are not cramped. */
+    .clan-system .small-box {
+        min-width: 0;
+    }
+
+    .clan-system .row > .col-lg-3:not([class*="col-sm-"]):not([class*="col-md-"]):not([class*="col-6"]):not([class*="col-xl"]) {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Secretary dashboard stat boxes (col-lg-3 only) - 2 up */
+    .clan-system .row > [class*="col-lg-3"]:not([class*="col-sm-"]):not([class*="col-md-"]):not([class*="col-6"]):not([class*="col-xl"]) {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+}
+
+/* =========================================================
+   CARDS & CONTENT - prevent horizontal overflow
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .clan-system .card-body {
+        padding: 12px;
+    }
+
+    .clan-system .card-header {
+        padding: 12px;
+    }
+
+    /* Any element with long fixed widths should not overflow */
+    .clan-system .content-wrapper,
+    .clan-system .clan-page-content,
+    .clan-system .card,
+    .clan-system .card-body {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+}
+
+/* =========================================================
+   CARD HEADERS & CARD-TOOLS - wrap on small screens so
+   long titles + multiple buttons never overflow/clip
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    /* AdminLTE card-headers are float-based by default; force a
+       real flexbox on mobile so long titles + toolbars never
+       overflow or clip. Desktop (>=768px) is untouched. */
+    .clan-system .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+    }
+
+    .clan-system .card-header .card-title {
+        float: none;
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .clan-system .card-tools {
+        float: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1 1 100%;
+        width: 100%;
+        margin: 0.25rem 0 0 0;
+        margin-left: 0 !important;
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .clan-system .card-tools .btn,
+    .clan-system .card-tools .btn-group {
+        white-space: normal;
+    }
+
+    .clan-system .card-tools .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .clan-system .card-tools .btn-group .btn {
+        border-radius: 9px !important;
+        margin-left: 0;
+    }
+
+}
+
+/* =========================================================
+   CHAT - pin composer above keyboard on mobile
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .clan-system .clan-chat-panel .card,
+    .clan-messages-page .clan-chat-panel .card {
+        height: calc(100dvh - 120px) !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .clan-system .clan-chat-panel .card-body,
+    .clan-messages-page #messagesContainer {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        height: auto !important;
+    }
+
+    .clan-system .clan-chat-panel .card-footer {
+        flex: 0 0 auto;
+    }
+
+    .clan-system .clan-chat-panel #mentionSuggestions,
+    .clan-messages-page #mentionSuggestions {
+        width: calc(100% - 12px) !important;
+        left: 6px !important;
+        bottom: 60px !important;
+        max-width: none !important;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .clan-system .clan-chat-panel .card,
+    .clan-messages-page .clan-chat-panel .card {
+        height: calc(100dvh - 90px) !important;
+    }
+
+    .clan-system .clan-chat-panel .clan-message-list,
+    .clan-system .clan-chat-panel .chat-messages,
+    .clan-system .clan-chat-panel .clan-members-panel .card-body,
+    .clan-messages-page .clan-members-panel .card-body {
+        height: auto !important;
+    }
+
+    .clan-system .clan-chat-panel .clan-members-panel,
+    .clan-messages-page .clan-members-panel {
+        height: auto !important;
+        max-height: 35vh;
+        overflow-y: auto;
+    }
+
+    .clan-messages-page #messagesContainer {
+        height: calc(100dvh - 260px) !important;
+    }
+
+}
+
+/* =========================================================
+   GALLERY - responsive grid on small screens
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    /* Stat/info boxes and gallery tiles that only use col-md-*
+       (single-column below 768px) become 2-up on phones for a
+       compact grid instead of a tall single-column stack.
+       col-md-6/col-md-4 are left to stack full-width since they
+       usually hold form fields. */
+    .clan-system .row > .col-md-2:not([class*="col-sm-"]):not([class*="col-6"]):not([class*="col-lg"]),
+    .clan-system .row > .col-md-3:not([class*="col-sm-"]):not([class*="col-6"]):not([class*="col-lg"]),
+    .clan-system .row > [class*="col-lg-3"]:not([class*="col-sm-"]):not([class*="col-md-"]):not([class*="col-6"]) {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .clan-system .gallery-grid,
+    .clan-system .clan-gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .clan-system .gallery-item img,
+    .clan-system .clan-gallery-item img,
+    .clan-system .gallery-tile img,
+    .clan-system .gallery-card img {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+/* =========================================================
+   FAMILY TREE - smaller footprint + relaxed touch on phones
+   so the viewport does not trap page scrolling.
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .clan-system .family-tree-wrapper {
+        height: 55vh;
+        min-height: 300px !important;
+        touch-action: pan-x pinch-zoom !important;
+    }
+
+    .clan-system .family-tree-forest {
+        padding: 30px 30px 60px;
+        gap: 30px;
+    }
+
+}
+
+/* =========================================================
+   NAVBAR - compact on very small screens
+   ========================================================= */
+
+@media (max-width: 419.98px) {
+
+    .clan-system .clan-navbar {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+    }
+
+    .clan-system .main-header.navbar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+}
+
+/* =========================================================
+   NAVBAR DROPDOWNS (language / notifications / profile)
+   Ensure they are fully visible on phones instead of
+   overflowing off the right edge of the screen.
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .clan-system .main-header .navbar-nav > .nav-item .dropdown-menu,
+    .clan-system .navbar .dropdown-menu.clan-dropdown,
+    .clan-system .navbar .dropdown-menu.clan-profile-menu {
+        position: fixed !important;
+        left: 8px !important;
+        right: 8px !important;
+        top: 58px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: calc(100% - 16px) !important;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Notifications panel should not rely on its large minimum width */
+    .clan-system .dropdown-menu.dropdown-menu-lg {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: calc(100% - 16px) !important;
+    }
+
+}
+
+@media (max-width: 419.98px) {
+
+    .clan-system .main-header .navbar-nav > .nav-item .dropdown-menu,
+    .clan-system .navbar .dropdown-menu.clan-dropdown,
+    .clan-system .navbar .dropdown-menu.clan-profile-menu {
+        left: 6px !important;
+        right: 6px !important;
+        max-width: calc(100% - 12px) !important;
+    }
+
+    .clan-system .clan-avatar {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+}
+
+/* =========================================================
+   MODALS - fit content on small screens
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .clan-system .modal-dialog {
+        margin: 0.5rem;
+    }
+
+    .clan-system .modal-body {
+        padding: 14px;
     }
 
 }

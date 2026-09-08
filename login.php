@@ -1,82 +1,132 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+declare(strict_types=1);
 
-require_once 'config/constants.php';
-include 'includes/header.php';
+require_once __DIR__ . '/config/constants.php';
+require_once __DIR__ . '/config/security.php';
+require_once __DIR__ . '/includes/public/header.php';
+
 ?>
-
-
 
 <div class="login-page">
 
-    <div class="login-container">
 
-        <div class="login-logo">
+<div class="login-container">
 
-            <!-- Baadaye hapa itawekwa logo kutoka database -->
-            <h1><?= APP_NAME; ?></h1>
+    <div class="login-logo">
+
+        <h1><?= htmlspecialchars(APP_NAME, ENT_QUOTES, 'UTF-8'); ?></h1>
+
+    </div>
+
+    <div class="login-header">
+
+        <h2>Welcome Back</h2>
+
+        <p>Sign in to continue.</p>
+
+    </div>
+
+    <?php if (!empty($_SESSION['error'])): ?>
+
+        <div class="alert alert-danger">
+
+            <?= htmlspecialchars(
+                $_SESSION['error'],
+                ENT_QUOTES,
+                'UTF-8'
+            ); ?>
+
+        </div>
+
+        <?php unset($_SESSION['error']); ?>
+
+    <?php endif; ?>
+
+    <?php if (isset($_GET['timeout'])): ?>
+
+        <div class="alert alert-warning">
+
+            Your session has expired. Please log in again.
 
         </div>
 
-        <div class="login-header">
+    <?php endif; ?>
 
-            <h2>Welcome Back</h2>
+    <form
+        action="login_process.php"
+        method="POST"
+        autocomplete="off"
+    >
 
-            <p>Sign in to continue.</p>
+        <?= csrf_field(); ?>
+
+        <div class="form-group">
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="login"
+                placeholder="Enter your username"
+                autocomplete="username"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
 
         </div>
 
-        <form action="login_process.php" method="POST" autocomplete="off">
+        <button
+            type="submit"
+            class="btn btn-primary login-btn"
+        >
 
-            <div class="form-group">
+            Login
 
-                <label>
-                    Member Code / Username / Email / Phone
-                </label>
+        </button>
 
-                <input
-                    type="text"
-                    name="login"
-                    placeholder="Enter your login details"
-                    required
-                >
+    </form>
 
-            </div>
+    <div class="login-footer">
 
-            <div class="form-group">
+        <a href="#">
 
-                <label>Password</label>
+            Forgot Password?
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                >
+            <br>
 
-            </div>
+            <h6 style="color: red;">
+                Contact your chairperson to create a new password.
+            </h6>
 
-            <button type="submit" class="btn btn-primary login-btn">
-
-                Login
-
-            </button>
-
-        </form>
-
-        <div class="login-footer">
-
-            <a href="#">
-                Forgot Password?
-            </a>
-
-        </div>
+        </a>
 
     </div>
 
 </div>
 
-<?php include 'includes/footer.php'; ?>
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/includes/public/footer.php';
+
+?>

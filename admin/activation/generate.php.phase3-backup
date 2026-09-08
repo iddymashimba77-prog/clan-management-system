@@ -1,0 +1,251 @@
+<?php
+declare(strict_types=1);
+
+require_once '../../config/database.php';
+require_once '../../config/constants.php';
+require_once '../../config/auth.php';
+
+requireLogin();
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    exit('Method Not Allowed');
+}
+
+
+$database = new Database();
+$pdo = $database->connect();
+
+
+/*
+|--------------------------------------------------------------------------
+| Verify Administrator
+|--------------------------------------------------------------------------
+*/
+
+if (
+    !isset($_SESSION['user_id']) ||
+    (int)$_SESSION['user_id'] <= 0
+) {
+    http_response_code(403);
+    exit('Unauthorized.');
+}
+
+
+$userId = (int)$_SESSION['user_id'];
+
+
+/*
+|--------------------------------------------------------------------------
+| Verify role
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT role_id
+    FROM users
+    WHERE user_id = ?
+    LIMIT 1
+");
+
+$stmt->execute([$userId]);
+
+$user = $stmt->fetch();
+
+if (!$user || (int)$user['role_id'] !== 5) {
+
+    http_response_code(403);
+
+    exit(
+        'Only the Administrator can generate activation tokens.'
+    );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Check whether installation already has a token
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->query("
+    SELECT
+        activation_id,
+        token_status
+    FROM activation_tokens
+    LIMIT 1
+");
+
+$existing = $stmt->fetch();
+
+if ($existing) {
+
+    exit(
+        'This installation already has an activation token.'
+    );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Installation ID
+|--------------------------------------------------------------------------
+*/
+
+$installationId =
+    'CMS-' .
+    strtoupper(
+        bin2hex(
+            random_bytes(24)
+        )
+    );
+
+
+/*
+|--------------------------------------------------------------------------
+| Generate token
+|--------------------------------------------------------------------------
+*/
+
+$plainToken =
+    'CMS-ACT-' .
+    strtoupper(
+        bin2hex(
+            random_bytes(32)
+        )
+    );
+
+
+/*
+|--------------------------------------------------------------------------
+| Hash token
+|--------------------------------------------------------------------------
+*/
+
+$tokenHash = password_hash(
+    $plainToken,
+    PASSWORD_DEFAULT
+);
+
+
+/*
+|--------------------------------------------------------------------------
+| Expiration
+|--------------------------------------------------------------------------
+|
+| Example: token expires after 24 hours.
+|
+*/
+
+$expiresAt =
+    date(
+        'Y-m-d H:i:s',
+        time() + (24 * 60 * 60)
+    );
+
+
+/*
+|--------------------------------------------------------------------------
+| Save
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    INSERT INTO activation_tokens
+    (
+        installation_id,
+        token_hash,
+        token_status,
+        expires_at
+    )
+    VALUES
+    (
+        ?,
+        ?,
+        'active',
+        ?
+    )
+");
+
+$stmt->execute([
+    $installationId,
+    $tokenHash,
+    $expiresAt
+]);
+
+
+/*
+|--------------------------------------------------------------------------
+| Activation URL
+|--------------------------------------------------------------------------
+*/
+
+$activationUrl =
+    rtrim(BASE_URL, '/') .
+    '/activate/?token=' .
+    urlencode($plainToken);
+
+
+/*
+|--------------------------------------------------------------------------
+| Display once
+|--------------------------------------------------------------------------
+*/
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Activation Token
+    </title>
+
+</head>
+
+<body>
+
+<h2>
+    Activation Token Generated
+</h2>
+
+<p>
+    This token can only be used once.
+</p>
+
+<p>
+    It expires on:
+    <strong>
+        <?= htmlspecialchars($expiresAt) ?>
+    </strong>
+</p>
+
+<p>
+    <strong>
+        Activation Link
+    </strong>
+</p>
+
+<input
+    type="text"
+    value="<?= htmlspecialchars($activationUrl) ?>"
+    readonly
+    style="width:100%;padding:10px;"
+>
+
+<p>
+    <strong>
+        IMPORTANT:
+    </strong>
+    Save this link securely.
+    It will not be displayed again.
+</p>
+
+</body>
+
+</html>

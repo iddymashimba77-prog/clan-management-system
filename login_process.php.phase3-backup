@@ -1,0 +1,290 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+
+require_once 'config/database.php';
+require_once 'config/constants.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Request must be POST
+|--------------------------------------------------------------------------
+*/
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
+    header("Location: login.php");
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Receive Login Data
+|--------------------------------------------------------------------------
+*/
+
+$login =
+    trim($_POST['login'] ?? '');
+
+$password =
+    $_POST['password'] ?? '';
+
+
+/*
+|--------------------------------------------------------------------------
+| Validate Input
+|--------------------------------------------------------------------------
+*/
+
+if (
+    $login === '' ||
+    $password === ''
+) {
+
+    $_SESSION['error'] =
+        "Please enter your login details and password.";
+
+    header("Location: login.php");
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Database
+|--------------------------------------------------------------------------
+*/
+
+$database = new Database();
+
+$pdo = $database->connect();
+
+
+/*
+|--------------------------------------------------------------------------
+| Find User
+|
+| Login using:
+| - Member Code
+| - Username
+| - Email
+| - Phone
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT
+        u.*,
+        r.role_name
+
+    FROM users u
+
+    LEFT JOIN roles r
+        ON u.role_id = r.role_id
+
+    WHERE
+        u.member_code = ?
+        OR u.username = ?
+        OR u.email = ?
+        OR u.phone = ?
+
+    LIMIT 1
+");
+
+$stmt->execute([
+
+    $login,
+    $login,
+    $login,
+    $login
+
+]);
+
+$user =
+    $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+/*
+|--------------------------------------------------------------------------
+| User Not Found
+|--------------------------------------------------------------------------
+*/
+
+if (!$user) {
+
+    $_SESSION['error'] =
+        "Invalid login credentials.";
+
+    header("Location: login.php");
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Account Status
+|--------------------------------------------------------------------------
+*/
+
+if (
+    ($user['account_status'] ?? '')
+    !== 'active'
+) {
+
+    $_SESSION['error'] =
+        "Your account is inactive.";
+
+    header("Location: login.php");
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Verify Password
+|--------------------------------------------------------------------------
+*/
+
+if (
+    !password_verify(
+        $password,
+        $user['password_hash']
+    )
+) {
+
+    $_SESSION['error'] =
+        "Invalid login credentials.";
+
+    header("Location: login.php");
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Secure Session
+|--------------------------------------------------------------------------
+*/
+
+session_regenerate_id(true);
+
+
+/*
+|--------------------------------------------------------------------------
+| Basic User Session
+|--------------------------------------------------------------------------
+*/
+
+$_SESSION['user_id'] =
+    $user['user_id'];
+
+$_SESSION['username'] =
+    $user['username'];
+
+$_SESSION['profile_picture'] =
+    $user['profile_picture'] ?? null;
+
+$_SESSION['role_name'] =
+    $user['role_name'] ?? 'Member';
+
+$_SESSION['role_id'] =
+    $user['role_id'];
+
+$_SESSION['member_code'] =
+    $user['member_code'];
+
+
+/*
+|--------------------------------------------------------------------------
+| Full Name
+|--------------------------------------------------------------------------
+*/
+
+$_SESSION['full_name'] =
+    trim(
+        $user['first_name'] . ' ' .
+        ($user['middle_name'] ?? '') . ' ' .
+        $user['last_name']
+    );
+
+
+/*
+|--------------------------------------------------------------------------
+| Load RBAC Permissions
+|--------------------------------------------------------------------------
+*/
+
+require_once 'config/permissions.php';
+
+
+$_SESSION['roles'] =
+    getUserRoles(
+        $user['user_id']
+    );
+
+
+/*
+|--------------------------------------------------------------------------
+| Redirect According To Role
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Redirect According To Role
+|--------------------------------------------------------------------------
+|
+| Administrator = 5
+| Chairperson   = 1
+| Secretary     = 2
+| Treasurer     = 3
+| Member        = 4
+|--------------------------------------------------------------------------
+*/
+
+$roleId = (int)($user['role_id'] ?? 4);
+
+
+if ($roleId === 5) {
+
+    header(
+        "Location: admin/dashboard.php"
+    );
+
+} elseif ($roleId === 1) {
+
+    header(
+        "Location: chairperson/dashboard.php"
+    );
+
+} elseif ($roleId === 3) {
+
+    header(
+        "Location: treasurer/dashboard.php"
+    );
+
+} elseif ($roleId === 2) {
+
+    header(
+        "Location: secretary/dashboard.php"
+    );
+
+} else {
+
+    header(
+        "Location: member/dashboard.php"
+    );
+}
+
+exit;

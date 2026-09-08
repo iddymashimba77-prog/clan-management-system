@@ -44,4 +44,18 @@ define('ROLE_CHAIRPERSON', 1);
 define('ROLE_SECRETARY', 2);
 define('ROLE_TREASURER', 3);
 define('ROLE_MEMBER', 4);
+define('ROLE_ADMINISTRATOR', 5);
+
+// Clan / Tenant Status
+define('CLAN_STATUS_PENDING', 'pending');
+define('CLAN_STATUS_ACTIVE', 'active');
+define('CLAN_STATUS_SUSPENDED', 'suspended');
+define('CLAN_STATUS_REVOKED', 'revoked');
+
+// Subscription Status
+define('SUB_STATUS_TRIAL', 'trial');
+define('SUB_STATUS_ACTIVE', 'active');
+define('SUB_STATUS_EXPIRED', 'expired');
+define('SUB_STATUS_SUSPENDED', 'suspended');
+define('SUB_STATUS_CANCELLED', 'cancelled');
 

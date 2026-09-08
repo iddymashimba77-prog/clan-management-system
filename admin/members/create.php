@@ -1,194 +1,763 @@
 <?php
 
 require_once '../../config/database.php';
+require_once '../../config/constants.php';
+require_once '../../config/auth.php';
+
+requireAdministrator();
 
 $database = new Database();
 $pdo = $database->connect();
 
-require_once '../../config/constants.php';
-require_once '../../config/auth.php';
+$clanId = getCurrentClanId();
 
+/*
+|--------------------------------------------------------------------------
+| Roles
+|--------------------------------------------------------------------------
+*/
 
-requireLogin();
+$roles = $pdo->query("
+    SELECT role_id, role_name
+    FROM roles
+    ORDER BY role_id
+")->fetchAll(PDO::FETCH_ASSOC);
 
-if (!hasRole(ROLE_CHAIRPERSON)) {
-    header("Location: /Clan_Management_System/login.php");
-    exit;
-}
+/*
+|--------------------------------------------------------------------------
+| Generations
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT generation_id, generation_name
+    FROM generations
+    WHERE clan_id = ?
+    ORDER BY generation_id
+");
+$stmt->execute([$clanId]);
+$generations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/*
+|--------------------------------------------------------------------------
+| Existing members
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT
+        user_id,
+        member_code,
+        first_name,
+        middle_name,
+        last_name,
+        gender
+    FROM users
+    WHERE is_deleted = 0
+      AND clan_id = ?
+    ORDER BY first_name, last_name
+");
+$stmt->execute([$clanId]);
+$members = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+require_once '../../includes/dashboard/header.php';
+require_once '../../includes/dashboard/sidebar.php';
+require_once '../../includes/dashboard/navbar.php';
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<div class="content-wrapper">
 
-<head>
+<section class="content">
 
-    <meta charset="UTF-8">
+<div class="container-fluid clan-page-content">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="card clan-page-card">
 
-    <title>Add Family Member</title>
+<div class="card-header">
 
-</head>
+<h3 class="card-title">
 
-<body>
+<i class="fas fa-user-plus mr-2 text-primary"></i>
 
-    <h2>Add Family Member</h2>
+Add New Member
 
-    <form action="store.php" method="POST" enctype="multipart/form-data">
+</h3>
 
-        <label>First Name</label><br>
-        <input type="text" name="first_name" required><br><br>
+</div>
 
-        <label>Middle Name</label><br>
-        <input type="text" name="middle_name"><br><br>
+<form
+action="store.php"
+method="POST"
+enctype="multipart/form-data"
+>
 
-        <label>Last Name</label><br>
-        <input type="text" name="last_name" required><br><br>
+<div class="card-body">
 
-        <label>Gender</label><br>
-        <select name="gender" required>
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select><br><br>
+<div class="row">
 
-        <label>Date of Birth</label><br>
-        <input type="date" name="date_of_birth"><br><br>
+<!-- PERSONAL INFORMATION -->
 
-        <label>Phone</label><br>
-        <input type="text" name="phone"><br><br>
+<div class="col-md-12">
 
-        <label>Email</label><br>
-        <input type="email" name="email"><br><br>
+<h5 class="text-primary mb-3">
 
-        <label>Birth Place</label><br>
-        <input type="text" name="birth_place"><br><br>
+<i class="fas fa-user mr-2"></i>
 
-        <label>Marital Status</label><br>
+Personal Information
 
-    <select name="marital_status">
+</h5>
 
-        <option value="Single">Single</option>
+</div>
 
-        <option value="Married">Married</option>
 
-        <option value="Divorced">Divorced</option>
+<div class="col-md-4">
 
-        <option value="Widowed">Widowed</option>
+<div class="form-group">
 
-    </select>
+<label>First Name *</label>
 
-    <label>Father</label><br>
+<input
+type="text"
+name="first_name"
+class="form-control"
+required
+>
 
-<select name="father_user_id">
+</div>
 
-    <option value="">Select Father</option>
+</div>
 
-    <?php
-    $stmt = $pdo->query("
-        SELECT user_id, first_name, last_name, member_code
-        FROM users
-        WHERE is_deleted = 0
-        ORDER BY first_name ASC
-    ");
 
-    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
-    ?>
+<div class="col-md-4">
 
-        <option value="<?= $person['user_id']; ?>">
-            <?= htmlspecialchars(
-                $person['member_code'] . ' - ' .
-                $person['first_name'] . ' ' .
-                $person['last_name']
-            ); ?>
-        </option>
+<div class="form-group">
 
-    <?php endwhile; ?>
+<label>Middle Name</label>
 
-</select>
+<input
+type="text"
+name="middle_name"
+class="form-control"
+>
 
-<br><br>
+</div>
 
-<label>Mother</label><br>
+</div>
 
-<select name="mother_user_id">
 
-    <option value="">Select Mother</option>
+<div class="col-md-4">
 
-    <?php
-    $stmt = $pdo->query("
-        SELECT user_id, first_name, last_name, member_code
-        FROM users
-        WHERE is_deleted = 0
-        ORDER BY first_name ASC
-    ");
+<div class="form-group">
 
-    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
-    ?>
+<label>Last Name *</label>
 
-        <option value="<?= $person['user_id']; ?>">
-            <?= htmlspecialchars(
-                $person['member_code'] . ' - ' .
-                $person['first_name'] . ' ' .
-                $person['last_name']
-            ); ?>
-        </option>
+<input
+type="text"
+name="last_name"
+class="form-control"
+required
+>
 
-    <?php endwhile; ?>
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label>Gender *</label>
+
+<select
+name="gender"
+class="form-control"
+required
+>
+
+<option value="">Select Gender</option>
+
+<option value="Male"><?= __('male') ?></option>
+
+<option value="Female"><?= __('female') ?></option>
 
 </select>
 
-<br><br>
+</div>
 
-<label>Spouse</label><br>
+</div>
 
-<select name="spouse_user_id">
 
-    <option value="">Select Spouse</option>
+<div class="col-md-4">
 
-    <?php
-    $stmt = $pdo->query("
-        SELECT user_id, first_name, last_name, member_code
-        FROM users
-        WHERE is_deleted = 0
-        ORDER BY first_name ASC
-    ");
+<div class="form-group">
 
-    while ($person = $stmt->fetch(PDO::FETCH_ASSOC)):
-    ?>
+<label>Date of Birth</label>
 
-        <option value="<?= $person['user_id']; ?>">
-            <?= htmlspecialchars(
-                $person['member_code'] . ' - ' .
-                $person['first_name'] . ' ' .
-                $person['last_name']
-            ); ?>
-        </option>
+<input
+type="date"
+name="date_of_birth"
+class="form-control"
+>
 
-    <?php endwhile; ?>
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label>National ID</label>
+
+<input
+type="text"
+name="national_id"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('phone') ?></label>
+
+<input
+type="text"
+name="phone"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('email') ?></label>
+
+<input
+type="email"
+name="email"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('username') ?></label>
+
+<input
+type="text"
+name="username"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div class="col-md-12 mt-3">
+
+<h5 class="text-primary mb-3">
+
+<i class="fas fa-map-marker-alt mr-2"></i>
+
+Location & Background
+
+</h5>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Birth Place</label>
+
+<input
+type="text"
+name="birth_place"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Current Residence</label>
+
+<input
+type="text"
+name="current_residence"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label><?= __('occupation') ?></label>
+
+<input
+type="text"
+name="occupation"
+class="form-control"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Marital Status</label>
+
+<select
+name="marital_status"
+class="form-control"
+>
+
+<option value="Single"><?= __('single') ?></option>
+
+<option value="Married"><?= __('married') ?></option>
+
+<option value="Divorced"><?= __('divorced') ?></option>
+
+<option value="Widowed"><?= __('widowed') ?></option>
 
 </select>
 
-<br><br>
+</div>
 
-    <br><br>
+</div>
 
-        <label>Current Residence</label><br>
-        <input type="text" name="current_residence"><br><br>
 
-        <label>Biography</label><br>
-        <textarea name="biography"></textarea><br><br>
+<!-- FAMILY -->
 
-        <label>Profile Picture</label><br>
-        <input type="file" name="profile_picture"><br><br>
+<div class="col-md-12 mt-3">
 
-        <button type="submit">
-            Save Member
-        </button>
+<h5 class="text-primary mb-3">
 
-    </form>
+<i class="fas fa-users mr-2"></i>
 
-</body>
+Family Relationships
 
-</html>
+</h5>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('father') ?></label>
+
+<select
+name="father_user_id"
+class="form-control"
+>
+
+<option value="">Select Father</option>
+
+<?php foreach ($members as $m): ?>
+
+<?php if (($m['gender'] ?? '') !== 'Male') continue; ?>
+
+<option value="<?= (int)$m['user_id']; ?>">
+
+<?= htmlspecialchars(
+$m['member_code'].' - '.
+$m['first_name'].' '.
+$m['last_name']
+); ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('mother') ?></label>
+
+<select
+name="mother_user_id"
+class="form-control"
+>
+
+<option value="">Select Mother</option>
+
+<?php foreach ($members as $m): ?>
+
+<?php if (($m['gender'] ?? '') !== 'Female') continue; ?>
+
+<option value="<?= (int)$m['user_id']; ?>">
+
+<?= htmlspecialchars(
+$m['member_code'].' - '.
+$m['first_name'].' '.
+$m['last_name']
+); ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('spouse') ?></label>
+
+<select
+name="spouse_user_id"
+class="form-control"
+>
+
+<option value="">Select Spouse</option>
+
+<?php foreach ($members as $m): ?>
+
+<option value="<?= (int)$m['user_id']; ?>">
+
+<?= htmlspecialchars(
+$m['member_code'].' - '.
+$m['first_name'].' '.
+$m['last_name']
+); ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Family Member Type</label>
+
+<select
+name="family_member_type"
+class="form-control"
+>
+
+<option value="blood"><?= __('blood') ?></option>
+
+<option value="marriage"><?= __('marriage') ?></option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label><?= __('generation') ?></label>
+
+<select
+name="generation_id"
+class="form-control"
+>
+
+<option value="">Select Generation</option>
+
+<?php foreach ($generations as $generation): ?>
+
+<option value="<?= (int)$generation['generation_id']; ?>">
+
+<?= htmlspecialchars(
+$generation['generation_name']
+); ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- ACCOUNT -->
+
+<div class="col-md-12 mt-3">
+
+<h5 class="text-primary mb-3">
+
+<i class="fas fa-user-shield mr-2"></i>
+
+Account & Access
+
+</h5>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label><?= __('role') ?></label>
+
+<select
+name="role_id"
+class="form-control"
+>
+
+<?php foreach ($roles as $role): ?>
+
+<option
+value="<?= (int)$role['role_id']; ?>"
+<?= strtolower($role['role_name']) === 'member'
+? 'selected'
+: ''; ?>
+>
+
+<?= htmlspecialchars(
+$role['role_name']
+); ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label>Account Status</label>
+
+<select
+name="account_status"
+class="form-control"
+>
+
+<option value="active"><?= __('active') ?></option>
+
+<option value="inactive"><?= __('inactive') ?></option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="form-group">
+
+<label>Password *</label>
+
+<input
+type="password"
+name="password"
+class="form-control"
+required
+>
+
+</div>
+
+</div>
+
+
+<!-- MEDIA -->
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Profile Picture</label>
+
+<input
+type="file"
+name="profile_picture"
+class="form-control-file"
+accept="image/*"
+>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="form-group">
+
+<label>Cover Photo</label>
+
+<input
+type="file"
+name="cover_photo"
+class="form-control-file"
+accept="image/*"
+>
+
+</div>
+
+</div>
+
+
+<!-- BIOGRAPHY -->
+
+<div class="col-md-12">
+
+<div class="form-group">
+
+<label><?= __('biography') ?></label>
+
+<textarea
+name="biography"
+rows="5"
+class="form-control"
+></textarea>
+
+</div>
+
+</div>
+
+
+<!-- DECEASED -->
+
+<div class="col-md-12">
+
+<div class="custom-control custom-checkbox">
+
+<input
+type="checkbox"
+name="is_deceased"
+value="1"
+class="custom-control-input"
+id="isDeceased"
+>
+
+<label
+class="custom-control-label"
+for="isDeceased"
+>
+
+Mark member as deceased
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-footer">
+
+<a
+href="index.php"
+class="btn btn-secondary"
+>
+
+<i class="fas fa-arrow-left mr-1"></i>
+
+Cancel
+
+</a>
+
+<button
+type="submit"
+class="btn btn-primary float-right"
+>
+
+<i class="fas fa-save mr-1"></i>
+
+Save Member
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<?php
+
+require_once '../../includes/dashboard/footer.php';
+
+?>

@@ -1,0 +1,839 @@
+/* =========================================================
+   CLAN MANAGEMENT SYSTEM
+   GLOBAL MODERN UI
+   ========================================================= */
+
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+   :root {
+       --clan-primary: #2563eb;
+       --clan-primary-dark: #1d4ed8;
+       --clan-primary-soft: #eff6ff;
+   
+       --clan-dark: #0f172a;
+       --clan-dark-2: #172033;
+   
+       --clan-text: #172033;
+       --clan-muted: #64748b;
+   
+       --clan-bg: #f6f8fc;
+       --clan-card: #ffffff;
+   
+       --clan-border: #e5eaf2;
+   
+       --clan-success: #16a34a;
+       --clan-warning: #f59e0b;
+       --clan-danger: #dc2626;
+   
+       --clan-radius: 16px;
+   
+       --clan-shadow:
+           0 8px 30px rgba(15, 23, 42, 0.06);
+   
+       --clan-shadow-hover:
+           0 14px 40px rgba(15, 23, 42, 0.10);
+   
+       --sidebar-width: 270px;
+   }
+   
+   
+   /* =========================================================
+      GLOBAL
+      ========================================================= */
+   
+   html,
+   body {
+       font-family: 'Inter', sans-serif !important;
+       background: var(--clan-bg) !important;
+       color: var(--clan-text);
+   }
+   
+   body {
+       font-size: 14px;
+   }
+   
+   a {
+       text-decoration: none !important;
+   }
+   
+   button,
+   input,
+   select,
+   textarea {
+       font-family: inherit !important;
+   }
+   
+   
+   /* =========================================================
+      CONTENT WRAPPER
+      ========================================================= */
+   
+   .content-wrapper {
+       background: var(--clan-bg) !important;
+       min-height: calc(100vh - 70px);
+   }
+   
+   .content {
+       padding: 28px !important;
+   }
+   
+   
+   /* =========================================================
+      MODERN CARDS
+      ========================================================= */
+   
+   .card {
+       border: 1px solid var(--clan-border) !important;
+       border-radius: var(--clan-radius) !important;
+       box-shadow: var(--clan-shadow) !important;
+       background: var(--clan-card) !important;
+       overflow: hidden;
+   }
+   
+   .card:hover {
+       box-shadow: var(--clan-shadow-hover) !important;
+   }
+   
+   .card-header {
+       background: #fff !important;
+       border-bottom: 1px solid var(--clan-border) !important;
+       padding: 20px 24px !important;
+   }
+   
+   .card-header h3,
+   .card-header h4 {
+       margin: 0;
+       font-weight: 700;
+       color: var(--clan-dark);
+   }
+   
+   .card-body {
+       padding: 24px !important;
+   }
+   
+   .card-footer {
+       background: #fff !important;
+       border-top: 1px solid var(--clan-border) !important;
+       padding: 18px 24px !important;
+   }
+   
+   /* =========================================================
+   CLAN SIDEBAR BRAND
+========================================================= */
+
+.clan-brand {
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.clan-brand-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    color: #fff;
+
+    font-size: 15px;
+
+}
+
+
+.clan-brand .brand-text {
+
+    font-size: 18px;
+
+}
+
+
+.clan-brand .brand-text strong {
+
+    color: #fff;
+
+}
+
+
+.clan-brand .brand-text span {
+
+    color: #93c5fd;
+
+}
+
+
+/* =========================================================
+   SIDEBAR USER
+========================================================= */
+
+.clan-user-panel {
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+}
+
+
+.clan-sidebar-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        2px solid rgba(255,255,255,.85);
+
+}
+
+
+.clan-sidebar-role {
+
+    display: block;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size:
+        11px;
+
+    margin-top:
+        3px;
+
+}
+
+
+.clan-online-dot {
+
+    display:
+        inline-block;
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    margin-right:
+        4px;
+
+    border-radius:
+        50%;
+
+    background:
+        #22c55e;
+
+}
+   
+   /* =========================================================
+      SIDEBAR
+      ========================================================= */
+
+      
+   
+   .main-sidebar {
+       background: var(--clan-dark) !important;
+       width: var(--sidebar-width) !important;
+       box-shadow: 8px 0 30px rgba(15, 23, 42, 0.10);
+   }
+   
+   .main-sidebar .brand-link {
+       height: 72px;
+       display: flex;
+       align-items: center;
+       padding: 0 22px !important;
+       border-bottom: 1px solid rgba(255,255,255,.08) !important;
+   }
+   
+   .main-sidebar .brand-text {
+       color: #fff !important;
+       font-weight: 800 !important;
+       font-size: 17px;
+       letter-spacing: -0.3px;
+   }
+   
+   
+   /* sidebar user */
+   
+   .user-panel {
+       margin: 15px !important;
+       padding: 15px !important;
+       border-radius: 14px;
+       background: rgba(255,255,255,.06);
+       border-bottom: 0 !important;
+   }
+   
+   .user-panel .info a {
+       color: #fff !important;
+       font-weight: 600;
+   }
+   
+   .user-panel small {
+       color: #94a3b8 !important;
+   }
+   
+   
+   /* menu */
+   
+   .nav-sidebar {
+       padding: 8px 12px;
+   }
+   
+   .nav-sidebar .nav-item {
+       margin-bottom: 4px;
+   }
+   
+   .nav-sidebar .nav-link {
+       color: #cbd5e1 !important;
+       border-radius: 11px !important;
+       padding: 11px 14px !important;
+       transition: .2s ease;
+   }
+   
+   .nav-sidebar .nav-link:hover {
+       background: rgba(255,255,255,.07) !important;
+       color: #fff !important;
+   }
+   
+   .nav-sidebar .nav-link.active {
+       background: var(--clan-primary) !important;
+       color: #fff !important;
+       box-shadow: 0 7px 18px rgba(37,99,235,.30);
+   }
+   
+   .nav-sidebar .nav-icon {
+       font-size: 15px !important;
+       margin-right: 8px;
+   }
+   
+   .nav-header {
+       color: #64748b !important;
+       font-size: 10px !important;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+       padding: 18px 14px 8px !important;
+   }
+   
+   
+   /* =========================================================
+      NAVBAR
+      ========================================================= */
+   
+   .main-header {
+       height: 70px !important;
+       background: rgba(255,255,255,.95) !important;
+       border-bottom: 1px solid var(--clan-border) !important;
+       box-shadow: 0 4px 20px rgba(15,23,42,.04);
+   }
+   
+   .main-header .nav-link {
+       color: var(--clan-muted) !important;
+   }
+   
+   .main-header .nav-link:hover {
+       color: var(--clan-primary) !important;
+   }
+   
+   
+   /* =========================================================
+      PAGE TITLE
+      ========================================================= */
+   
+   .page-title {
+       margin-bottom: 25px;
+   }
+   
+   .page-title h1 {
+       font-size: 27px;
+       font-weight: 800;
+       color: var(--clan-dark);
+       margin-bottom: 5px;
+   }
+   
+   .page-title p {
+       color: var(--clan-muted);
+       margin: 0;
+   }
+   
+   
+   /* =========================================================
+      BUTTONS
+      ========================================================= */
+   
+   .btn {
+       border-radius: 10px !important;
+       font-weight: 600 !important;
+       padding: 9px 16px !important;
+       border: 0 !important;
+       transition: .2s ease;
+   }
+   
+   .btn:hover {
+       transform: translateY(-1px);
+   }
+   
+   .btn-primary {
+       background: var(--clan-primary) !important;
+   }
+   
+   .btn-primary:hover {
+       background: var(--clan-primary-dark) !important;
+   }
+   
+   .btn-success {
+       background: var(--clan-success) !important;
+   }
+   
+   .btn-danger {
+       background: var(--clan-danger) !important;
+   }
+   
+   .btn-warning {
+       color: #fff !important;
+       background: var(--clan-warning) !important;
+   }
+   
+   .btn-secondary {
+       background: #e9eef5 !important;
+       color: #334155 !important;
+   }
+   
+   
+   /* =========================================================
+      FORMS
+      ========================================================= */
+   
+   .form-control,
+   .custom-select {
+       border: 1px solid var(--clan-border) !important;
+       border-radius: 10px !important;
+       min-height: 44px;
+       box-shadow: none !important;
+       background: #fff !important;
+   }
+   
+   .form-control:focus,
+   .custom-select:focus {
+       border-color: var(--clan-primary) !important;
+       box-shadow: 0 0 0 3px rgba(37,99,235,.10) !important;
+   }
+   
+   label {
+       font-weight: 600;
+       color: #334155;
+       margin-bottom: 7px;
+   }
+   
+   
+   /* =========================================================
+      TABLES
+      ========================================================= */
+   
+   .table {
+       margin-bottom: 0;
+   }
+   
+   .table thead th {
+       background: #f8fafc !important;
+       color: #475569 !important;
+       font-size: 12px;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: .4px;
+       border-bottom: 1px solid var(--clan-border) !important;
+       padding: 14px !important;
+   }
+   
+   .table tbody td {
+       padding: 14px !important;
+       vertical-align: middle !important;
+       border-color: #edf1f6 !important;
+       color: #334155;
+   }
+   
+   .table tbody tr:hover {
+       background: #f8fbff;
+   }
+   
+   
+   /* =========================================================
+      BADGES
+      ========================================================= */
+   
+   .badge {
+       border-radius: 20px !important;
+       padding: 6px 10px !important;
+       font-weight: 600 !important;
+   }
+   
+   .badge-success {
+       background: #dcfce7 !important;
+       color: #166534 !important;
+   }
+   
+   .badge-warning {
+       background: #fef3c7 !important;
+       color: #92400e !important;
+   }
+   
+   .badge-danger {
+       background: #fee2e2 !important;
+       color: #991b1b !important;
+   }
+   
+   .badge-info {
+       background: #dbeafe !important;
+       color: #1e40af !important;
+   }
+   
+   
+   /* =========================================================
+      DASHBOARD STAT CARDS
+      ========================================================= */
+   
+   .small-box {
+       border-radius: 16px !important;
+       border: 1px solid var(--clan-border);
+       box-shadow: var(--clan-shadow);
+       overflow: hidden;
+       background: #fff !important;
+       color: var(--clan-text) !important;
+   }
+   
+   .small-box .inner {
+       padding: 22px !important;
+   }
+   
+   .small-box h3 {
+       font-size: 28px;
+       font-weight: 800;
+       margin-bottom: 5px;
+   }
+   
+   .small-box p {
+       color: var(--clan-muted);
+       font-weight: 500;
+   }
+   
+   .small-box .icon {
+       color: rgba(37,99,235,.10) !important;
+       font-size: 65px !important;
+   }
+   
+   .small-box:hover {
+       transform: translateY(-3px);
+       box-shadow: var(--clan-shadow-hover);
+   }
+   
+   
+   /* =========================================================
+      INFO BOX
+      ========================================================= */
+   
+   .info-box {
+       border-radius: 15px !important;
+       background: #fff !important;
+       border: 1px solid var(--clan-border);
+       box-shadow: var(--clan-shadow);
+   }
+   
+   .info-box-icon {
+       border-radius: 12px !important;
+       margin: 10px !important;
+   }
+   
+   .info-box-text {
+       color: var(--clan-muted);
+       font-weight: 600;
+   }
+   
+   .info-box-number {
+       color: var(--clan-dark);
+       font-size: 20px;
+   }
+   
+   
+   /* =========================================================
+      DROPDOWN
+      ========================================================= */
+   
+   .dropdown-menu {
+       border: 1px solid var(--clan-border) !important;
+       border-radius: 12px !important;
+       box-shadow: var(--clan-shadow-hover) !important;
+       padding: 7px !important;
+   }
+   
+   .dropdown-item {
+       border-radius: 8px;
+       padding: 9px 12px;
+   }
+   
+   .dropdown-item:hover {
+       background: var(--clan-primary-soft);
+       color: var(--clan-primary);
+   }
+   
+   
+   /* =========================================================
+      PROFILE AVATAR
+      ========================================================= */
+   
+   .clan-avatar {
+       width: 42px;
+       height: 42px;
+       border-radius: 50%;
+       object-fit: cover;
+       border: 2px solid #e5eaf2;
+   }
+   
+   .clan-avatar-lg {
+       width: 90px;
+       height: 90px;
+       border-radius: 50%;
+       object-fit: cover;
+       border: 4px solid #fff;
+       box-shadow: 0 8px 25px rgba(15,23,42,.12);
+   }
+   
+   
+   /* =========================================================
+      NOTIFICATION
+      ========================================================= */
+   
+   .notification-badge {
+       position: absolute;
+       top: 5px;
+       right: 3px;
+       width: 8px;
+       height: 8px;
+       background: #ef4444;
+       border-radius: 50%;
+   }
+   
+   
+   /* =========================================================
+      MESSAGES
+      ========================================================= */
+   
+   .message-card {
+       background: #fff;
+       border: 1px solid var(--clan-border);
+       border-radius: 15px;
+       box-shadow: var(--clan-shadow);
+   }
+   
+   .message-bubble {
+       border-radius: 15px;
+       padding: 11px 15px;
+       max-width: 75%;
+   }
+   
+   .message-bubble.mine {
+       background: var(--clan-primary);
+       color: #fff;
+       margin-left: auto;
+   }
+   
+   .message-bubble.theirs {
+       background: #f1f5f9;
+       color: var(--clan-text);
+   }
+   
+   
+   /* =========================================================
+      GALLERY
+      ========================================================= */
+   
+   .clan-gallery-card {
+       border-radius: 16px;
+       overflow: hidden;
+       background: #fff;
+       border: 1px solid var(--clan-border);
+       box-shadow: var(--clan-shadow);
+       transition: .25s ease;
+   }
+   
+   .clan-gallery-card:hover {
+       transform: translateY(-4px);
+       box-shadow: var(--clan-shadow-hover);
+   }
+   
+   .clan-gallery-card img {
+       width: 100%;
+       height: 220px;
+       object-fit: cover;
+   }
+   
+   
+   /* =========================================================
+      EVENTS
+      ========================================================= */
+   
+   .event-card {
+       background: #fff;
+       border: 1px solid var(--clan-border);
+       border-radius: 16px;
+       overflow: hidden;
+       box-shadow: var(--clan-shadow);
+       transition: .25s ease;
+   }
+   
+   .event-card:hover {
+       transform: translateY(-3px);
+       box-shadow: var(--clan-shadow-hover);
+   }
+   
+   .event-card img {
+       width: 100%;
+       height: 210px;
+       object-fit: cover;
+   }
+   
+   .event-date {
+       color: var(--clan-primary);
+       font-size: 12px;
+       font-weight: 700;
+       text-transform: uppercase;
+   }
+   
+   
+   /* =========================================================
+      FAMILY TREE
+      ========================================================= */
+   
+   .family-tree-container {
+       background: #fff;
+       border: 1px solid var(--clan-border);
+       border-radius: 18px;
+       padding: 25px;
+       box-shadow: var(--clan-shadow);
+   }
+   
+   
+   /* =========================================================
+      PAGINATION
+      ========================================================= */
+   
+   .page-link {
+       border: 0 !important;
+       border-radius: 8px !important;
+       margin: 2px;
+       color: var(--clan-primary);
+   }
+   
+   .page-item.active .page-link {
+       background: var(--clan-primary) !important;
+   }
+   
+   
+   /* =========================================================
+      ALERTS
+      ========================================================= */
+   
+   .alert {
+       border: 0 !important;
+       border-radius: 12px !important;
+   }
+   
+   
+   /* =========================================================
+      MODALS
+      ========================================================= */
+   
+   .modal-content {
+       border: 0 !important;
+       border-radius: 18px !important;
+       box-shadow: 0 20px 70px rgba(15,23,42,.20);
+   }
+   
+   .modal-header {
+       border-bottom: 1px solid var(--clan-border);
+   }
+   
+   .modal-footer {
+       border-top: 1px solid var(--clan-border);
+   }
+   
+   
+   /* =========================================================
+      FOOTER
+      ========================================================= */
+   
+   .main-footer {
+       background: #fff !important;
+       border-top: 1px solid var(--clan-border) !important;
+       color: var(--clan-muted);
+       padding: 18px 25px !important;
+   }
+   
+   
+   /* =========================================================
+      RESPONSIVE
+      ========================================================= */
+   
+   @media (max-width: 991.98px) {
+   
+       .main-sidebar {
+           width: 270px !important;
+       }
+   
+       .content {
+           padding: 20px !important;
+       }
+   
+       .page-title h1 {
+           font-size: 23px;
+       }
+   }
+   
+   
+   @media (max-width: 575.98px) {
+   
+       .content {
+           padding: 15px !important;
+       }
+   
+       .card-body {
+           padding: 17px !important;
+       }
+   
+       .card-header {
+           padding: 16px !important;
+       }
+   
+       .small-box h3 {
+           font-size: 24px;
+       }
+   
+       .table {
+           font-size: 12px;
+       }
+   
+       .btn {
+           padding: 8px 12px !important;
+       }
+   }

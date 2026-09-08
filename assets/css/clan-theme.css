@@ -1,0 +1,2310 @@
+/* =========================================================
+   CLAN MANAGEMENT SYSTEM
+   GLOBAL DESIGN SYSTEM
+========================================================= */
+
+:root {
+
+    --clan-primary: #0f172a;
+    --clan-secondary: #1e293b;
+
+    --clan-accent: #2563eb;
+    --clan-accent-hover: #1d4ed8;
+
+    --clan-success: #16a34a;
+    --clan-danger: #dc2626;
+    --clan-warning: #d97706;
+
+    --clan-bg: #f8fafc;
+    --clan-card: #ffffff;
+
+    --clan-text: #0f172a;
+    --clan-muted: #64748b;
+
+    --clan-border: #e2e8f0;
+
+    --clan-radius: 14px;
+
+    --clan-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.content {
+    margin-top: 20px;
+}
+
+.content-wrapper[style*="margin-left: 0"] {
+    margin-left: auto !important;
+}
+
+body.clan-system {
+
+    background: var(--clan-bg);
+
+    color: var(--clan-text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.clan-system .content-wrapper {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fafc 0%,
+            #eef2ff 100%
+        );
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.clan-system .main-sidebar {
+
+    background:
+        linear-gradient(
+            180deg,
+            #0f172a 0%,
+            #111827 100%
+        );
+
+    border-right: 1px solid
+        rgba(255,255,255,.06);
+
+}
+
+
+.clan-system .brand-link {
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    padding: 18px 16px;
+
+}
+
+
+.clan-system .brand-text {
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+
+}
+
+
+.clan-system .nav-sidebar
+.nav-item {
+
+    margin-bottom: 4px;
+
+}
+
+
+.clan-system .nav-sidebar
+.nav-link {
+
+    border-radius: 10px;
+
+    margin: 2px 10px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.clan-system .nav-sidebar
+.nav-link:hover {
+
+    background:
+        rgba(255,255,255,.08);
+
+    color: #fff;
+
+    transform:
+        translateX(2px);
+
+}
+
+
+.clan-system .nav-sidebar
+.nav-link.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    color: #fff;
+
+    box-shadow:
+        0 5px 15px
+        rgba(37,99,235,.25);
+
+}
+
+
+.clan-system .nav-sidebar
+.nav-icon {
+
+    width: 25px;
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.clan-system .main-header {
+
+    border-bottom:
+        1px solid var(--clan-border);
+
+    background:
+        rgba(255,255,255,.92);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+.clan-system .main-header
+.nav-link {
+
+    color: var(--clan-text);
+
+}
+
+
+.clan-system .main-header
+.nav-link:hover {
+
+    color:
+        var(--clan-accent);
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.clan-system .card {
+
+    border: 1px solid
+        var(--clan-border);
+
+    border-radius:
+        var(--clan-radius);
+
+    box-shadow:
+        var(--clan-shadow);
+
+    overflow: hidden;
+
+}
+
+
+.clan-system .card-header {
+
+    background:
+        #fff;
+
+    border-bottom:
+        1px solid var(--clan-border);
+
+    padding:
+        18px 20px;
+
+}
+
+
+.clan-system .card-title {
+
+    font-weight: 700;
+
+    color:
+        var(--clan-text);
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.clan-system .btn {
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.clan-system .btn:hover {
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.clan-system .btn-primary {
+
+    background:
+        var(--clan-accent);
+
+    border-color:
+        var(--clan-accent);
+
+}
+
+
+.clan-system .btn-primary:hover {
+
+    background:
+        var(--clan-accent-hover);
+
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.clan-system .table {
+
+    background: #fff;
+
+}
+
+
+.clan-system .table thead th {
+
+    background:
+        #f8fafc;
+
+    color:
+        #475569;
+
+    border-bottom:
+        2px solid var(--clan-border);
+
+    font-size: 13px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .4px;
+
+}
+
+
+.clan-system .table td {
+
+    vertical-align: middle;
+
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.clan-system .form-control {
+
+    border:
+        1px solid var(--clan-border);
+
+    border-radius:
+        9px;
+
+    min-height: 42px;
+
+}
+
+
+.clan-system .form-control:focus {
+
+    border-color:
+        var(--clan-accent);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,.10);
+
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.clan-system .badge {
+
+    border-radius:
+        999px;
+
+    padding:
+        6px 10px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   DASHBOARD SMALL BOXES
+========================================================= */
+
+.clan-system .small-box {
+
+    border-radius:
+        var(--clan-radius);
+
+    box-shadow:
+        var(--clan-shadow);
+
+    overflow:
+        hidden;
+
+}
+
+
+.clan-system .small-box:hover {
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+========================================================= */
+
+.clan-profile-avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        2px solid #fff;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,.12);
+
+}
+
+
+.clan-profile-avatar-lg {
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+
+/* =========================================================
+   ONLINE INDICATOR
+========================================================= */
+
+.clan-online-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    background:
+        #22c55e;
+
+    border-radius: 50%;
+
+    display: inline-block;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,.15);
+
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.clan-page-title {
+
+    font-size:
+        1.5rem;
+
+    font-weight:
+        750;
+
+    margin-bottom:
+        4px;
+
+}
+
+
+.clan-page-subtitle {
+
+    color:
+        var(--clan-muted);
+
+    font-size:
+        .9rem;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .clan-system .card {
+
+        border-radius:
+            10px;
+
+    }
+
+    .clan-page-title {
+
+        font-size:
+            1.25rem;
+
+    }
+}
+
+/* =========================================================
+   CLAN NAVBAR
+========================================================= */
+
+.clan-navbar {
+
+    min-height: 64px !important;
+
+    border-bottom:
+        1px solid #e2e8f0 !important;
+
+    background:
+        rgba(255, 255, 255, 0.94) !important;
+
+    backdrop-filter:
+        blur(14px);
+
+    box-shadow:
+        0 2px 15px
+        rgba(15, 23, 42, 0.04);
+
+}
+
+
+/* =========================================================
+   NAVBAR ACTIONS
+========================================================= */
+
+.clan-nav-action {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    margin: 10px 3px;
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.clan-nav-action:hover {
+
+    background:
+        #f1f5f9;
+
+    color:
+        #2563eb !important;
+
+}
+
+
+/* =========================================================
+   SIDEBAR TOGGLE FEEDBACK
+   =========================================================
+   Shows clear pressed/touched feedback on the sidebar toggle
+   button, and makes the open state visible (icon flips).
+*/
+
+.clan-menu-toggle {
+
+    transition:
+        all .2s ease !important;
+
+}
+
+.clan-menu-toggle:hover {
+
+    background:
+        #eef2f7;
+
+}
+
+.clan-menu-toggle:focus {
+
+    outline: none !important;
+
+    background:
+        #e2e8f0;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, .18);
+
+}
+
+.clan-menu-toggle:active {
+
+    background:
+        #dbe4ef;
+
+    transform:
+        scale(.9);
+
+}
+
+.clan-menu-toggle i {
+
+    transition:
+        transform .25s ease,
+        color .2s ease;
+
+}
+
+/* When the sidebar gets pushed open on desktop layouts, mark the
+   toggle so the clamped state is obvious after touching it */
+body.sidebar-collapse .clan-menu-toggle i {
+
+    transform:
+        rotate(180deg);
+
+    color:
+        #2563eb !important;
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.clan-profile-toggle {
+
+    padding:
+        6px 10px !important;
+
+    border-radius:
+        12px;
+
+    margin:
+        6px 8px;
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.clan-profile-toggle:hover {
+
+    background:
+        #f8fafc;
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.clan-avatar-wrapper {
+
+    position:
+        relative;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+}
+
+
+.clan-avatar {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border-radius:
+        50%;
+
+    object-fit:
+        cover;
+
+    border:
+        2px solid #fff;
+
+    box-shadow:
+        0 3px 12px
+        rgba(15, 23, 42, .15);
+
+}
+
+
+/* =========================================================
+   ONLINE INDICATOR
+========================================================= */
+
+.clan-online-indicator {
+
+    position:
+        absolute;
+
+    right:
+        0;
+
+    bottom:
+        1px;
+
+    width:
+        11px;
+
+    height:
+        11px;
+
+    background:
+        #22c55e;
+
+    border:
+        2px solid #fff;
+
+    border-radius:
+        50%;
+
+}
+
+
+/* =========================================================
+   USERNAME
+========================================================= */
+
+.clan-navbar-name {
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    line-height:
+        18px;
+
+    color:
+        #0f172a;
+
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.clan-navbar-role {
+
+    font-size:
+        11px;
+
+    color:
+        #64748b;
+
+    line-height:
+        14px;
+
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.clan-profile-menu {
+
+    width:
+        270px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        14px;
+
+    padding:
+        0;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 15px 40px
+        rgba(15, 23, 42, .15);
+
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.clan-profile-header {
+
+    padding:
+        22px 18px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fafc,
+            #eef2ff
+        );
+
+}
+
+
+.clan-profile-avatar {
+
+    width:
+        72px;
+
+    height:
+        72px;
+
+    border-radius:
+        50%;
+
+    object-fit:
+        cover;
+
+    border:
+        3px solid #fff;
+
+    box-shadow:
+        0 5px 20px
+        rgba(15, 23, 42, .15);
+
+}
+
+
+/* =========================================================
+   ROLE BADGE
+========================================================= */
+
+.clan-role-badge {
+
+    display:
+        inline-block;
+
+    margin-top:
+        5px;
+
+    padding:
+        4px 10px;
+
+    border-radius:
+        999px;
+
+    background:
+        #dbeafe;
+
+    color:
+        #1d4ed8;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.clan-dropdown {
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(15, 23, 42, .12);
+
+}
+
+
+.clan-dropdown .dropdown-item {
+
+    padding:
+        10px 15px;
+
+    border-radius:
+        7px;
+
+    margin:
+        2px 5px;
+
+}
+
+
+.clan-dropdown .dropdown-item:hover {
+
+    background:
+        #f1f5f9;
+
+}
+
+
+.clan-dropdown .dropdown-item.active {
+
+    background:
+        #eff6ff;
+
+    color:
+        #2563eb;
+
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+========================================================= */
+
+.clan-notification-badge {
+
+    top:
+        5px !important;
+
+    right:
+        1px !important;
+
+    font-size:
+        9px;
+
+    min-width:
+        17px;
+
+    height:
+        17px;
+
+    line-height:
+        12px;
+
+    border:
+        2px solid #fff;
+
+}
+
+
+/* =========================================================
+   GLOBAL CONTENT WIDTH
+   ========================================================= */
+
+   .content-wrapper > .content {
+    width: 100%;
+}
+
+.content-wrapper > .content > .container-fluid {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+
+/* =========================================================
+   STANDARD PAGE CONTENT
+   ========================================================= */
+
+.clan-page-content {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+
+/* =========================================================
+   CARDS / TABLES
+   ========================================================= */
+
+.clan-page-content > .card,
+.content-wrapper .container-fluid > .card {
+    width: 100%;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .content-wrapper > .content > .container-fluid,
+    .clan-page-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   SIDEBAR + CONTENT CENTERING FIX
+   ========================================================= */
+
+   .content-wrapper > .content {
+    width: 100%;
+}
+
+.content-wrapper > .content > .container-fluid,
+.content-wrapper > .content > .clan-page-content {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+
+/* Keep rows centered inside the content area */
+.content-wrapper .clan-page-content > .row {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* Cards should use the available centered width */
+.content-wrapper .clan-page-content .card {
+    width: 100%;
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+   ========================================================= */
+
+.sidebar-collapse .content-wrapper > .content > .container-fluid,
+.sidebar-collapse .content-wrapper > .content > .clan-page-content {
+    max-width: 1440px;
+    margin-right: auto !important;
+}
+
+
+/* =========================================================
+   OPEN SIDEBAR
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+    .content-wrapper > .content {
+        width: 100%;
+    }
+
+    .content-wrapper > .content > .container-fluid,
+    .content-wrapper > .content > .clan-page-content {
+        max-width: 1440px;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .content-wrapper > .content > .container-fluid,
+    .content-wrapper > .content > .clan-page-content {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+}
+
+/* =========================================================
+   GLOBAL CARD ALIGNMENT
+   ========================================================= */
+
+   .content-wrapper .clan-page-content > .card {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* When sidebar is open */
+@media (min-width: 992px) {
+
+    .content-wrapper .clan-page-content > .card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
+
+/* Shared pages sidebar toggle - let AdminLTE handle it naturally */
+/* No custom CSS needed - AdminLTE's built-in sidebar toggle will work */
+
+/* When sidebar is collapsed */
+.sidebar-collapse .content-wrapper .clan-page-content > .card {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* =========================================================
+   MESSAGES PAGE - SIDEBAR RESPONSIVENESS FIX
+   ========================================================= */
+
+/* Messages page - force responsiveness to sidebar toggle */
+.clan-messages-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    transition: margin-left 0.3s ease-in-out !important;
+}
+
+/* When sidebar is open */
+body:not(.sidebar-collapse) .clan-messages-page {
+    margin-left: 0 !important;
+}
+
+/* When sidebar is collapsed */
+body.sidebar-collapse .clan-messages-page {
+    margin-left: 0 !important;
+}
+
+/* Messages container-fluid */
+.clan-messages-page .container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    box-sizing: border-box !important;
+}
+
+/* Messages layout */
+.clan-messages-layout {
+    width: 100% !important;
+    max-width: 1500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+
+
+/* =========================================================
+   FAMILY TREE
+========================================================= */
+
+.family-tree-wrapper {
+    width: 100%;
+    overflow: auto;
+    padding: 35px 25px 60px;
+}
+
+.family-tree-forest {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px;
+    min-width: max-content;
+}
+
+.family-tree-root {
+    display: flex;
+    justify-content: center;
+}
+
+.family-tree-generation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+
+/* =========================================================
+   COUPLE
+========================================================= */
+
+.family-tree-couple {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.family-tree-person {
+    position: relative;
+    z-index: 5;
+}
+
+.family-tree-card {
+    width: 215px;
+    min-height: 118px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    box-shadow: 0 7px 22px rgba(15, 23, 42, .09);
+
+    transition: all .25s ease;
+}
+
+.family-tree-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 13px 30px rgba(15, 23, 42, .15);
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.family-tree-photo {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    position: relative;
+}
+
+.family-tree-photo img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+
+    border-radius: 50%;
+    border: 3px solid #eef2f7;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.family-tree-info {
+    min-width: 0;
+}
+
+.family-tree-relation {
+    margin-bottom: 4px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .5px;
+
+    color: #64748b;
+}
+
+.family-tree-name {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #172033;
+
+    overflow-wrap: anywhere;
+}
+
+.family-tree-code {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #64748b;
+}
+
+.family-tree-gender {
+    margin-top: 2px;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   SPOUSE CONNECTION
+========================================================= */
+
+.family-tree-spouse-line {
+    width: 34px;
+    height: 2px;
+
+    position: relative;
+
+    background: #e11d48;
+}
+
+.family-tree-spouse-line span {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    border-radius: 50%;
+
+    color: #e11d48;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PARENT → CHILD CONNECTION
+========================================================= */
+
+.family-tree-parent-connector {
+    width: 2px;
+    height: 32px;
+
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   CHILDREN ROW
+========================================================= */
+
+.family-tree-children {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 42px;
+
+    position: relative;
+
+    padding-top: 32px;
+}
+
+
+/* =========================================================
+   HORIZONTAL LINE ABOVE CHILDREN
+========================================================= */
+
+.family-tree-children::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: calc(100% - 215px);
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   CHILD VERTICAL CONNECTION
+========================================================= */
+
+.family-tree-child {
+    position: relative;
+    padding-top: 0;
+}
+
+.family-tree-child::before {
+    content: "";
+
+    position: absolute;
+
+    top: -32px;
+    left: 50%;
+
+    width: 2px;
+    height: 32px;
+
+    transform: translateX(-50%);
+
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   DECEASED
+========================================================= */
+
+.family-tree-deceased {
+    position: absolute;
+
+    top: -4px;
+    right: -4px;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #334155;
+    color: #fff;
+
+    font-size: 11px;
+
+    border: 2px solid #fff;
+}
+
+.family-tree-person.is-deceased .family-tree-card {
+    opacity: .82;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .family-tree-wrapper {
+        padding: 20px 10px 45px;
+    }
+
+    .family-tree-forest {
+        gap: 60px;
+    }
+
+    .family-tree-card {
+        width: 180px;
+        min-height: 105px;
+        padding: 11px;
+    }
+
+    .family-tree-photo,
+    .family-tree-photo img {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+
+    .family-tree-name {
+        font-size: 12px;
+    }
+
+    .family-tree-code,
+    .family-tree-gender {
+        font-size: 9px;
+    }
+
+    .family-tree-children {
+        gap: 22px;
+    }
+
+}
+
+/* =========================================================
+   FAMILY MEMBER PROFILE
+========================================================= */
+
+.family-member-profile-card {
+    overflow: hidden;
+}
+
+.family-member-profile-photo {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: auto;
+}
+
+.family-member-profile-photo img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #f1f5f9;
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+}
+
+.family-member-profile-photo .family-tree-deceased {
+    right: 5px;
+    top: 5px;
+}
+
+.family-member-profile-relation {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.family-member-profile-name {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 5px 0;
+}
+
+.family-member-profile-code {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.family-member-relation-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.family-member-relation-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 19px;
+}
+
+.family-member-relation-icon.female {
+    background: #fce7f3;
+    color: #db2777;
+}
+
+.family-member-relation-icon.spouse {
+    background: #ffe4e6;
+    color: #e11d48;
+}
+
+.family-member-child-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: inherit;
+    text-decoration: none !important;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: .2s ease;
+}
+
+.family-member-child-card:hover {
+    transform: translateY(-2px);
+    border-color: #93c5fd;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.family-member-child-card img {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.family-member-child-card strong,
+.family-member-child-card small {
+    display: block;
+}
+
+.family-member-child-card strong {
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.family-member-child-card small {
+    color: #64748b;
+    font-size: 11px;
+}
+
+@media (max-width: 768px) {
+
+    .family-member-profile-name {
+        font-size: 22px;
+        margin-top: 15px;
+    }
+
+    .family-member-profile-photo,
+    .family-member-profile-photo img {
+        width: 120px;
+        height: 120px;
+    }
+
+}
+
+/*renderfamily card*/
+
+.family-tree-card-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+.family-tree-card-link:hover {
+    color: inherit;
+}
+
+/* =========================================================
+   FAMILY MEMBERS SUCCESS ALERT
+========================================================= */
+
+.clan-success-alert {
+    border: 0;
+    border-left: 4px solid #28a745;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .06);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.clan-success-alert .close {
+    outline: none;
+}
+
+
+/* =========================================================
+   FAMILY MEMBERS TABLE
+========================================================= */
+
+.clan-page-content .table {
+    margin-bottom: 0;
+}
+
+.clan-page-content .table thead th {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.clan-page-content .table tbody td {
+    vertical-align: middle;
+}
+
+.clan-page-content .table tbody tr {
+    transition: .2s ease;
+}
+
+.clan-page-content .table tbody tr:hover {
+    transform: translateY(-1px);
+}
+
+.clan-page-content .card-header {
+    padding: 18px 20px;
+}
+
+.clan-page-content .card-body {
+    padding: 20px;
+}
+
+
+
+/*member view and edit css*/
+
+.clan-member-profile-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.clan-member-profile-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #f1f5f9;
+    box-shadow: 0 6px 20px rgba(0,0,0,.10);
+}
+
+.clan-member-details th {
+    background: #f8fafc;
+    font-weight: 600;
+    width: 35%;
+}
+
+.clan-member-details td,
+.clan-member-details th {
+    vertical-align: middle;
+}
+
+.clan-form-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #334155;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.clan-page-card {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(15,23,42,.07);
+}
+
+.clan-page-card .card-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* =========================================================
+   FAMILY TREE — PHASE 4 + PHASE 10 
+========================================================= */
+
+.family-tree-toolbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.family-tree-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.family-tree-search {
+    max-width: 650px;
+}
+
+.family-tree-search .form-control {
+    height: 40px;
+    border-radius: 8px 0 0 8px;
+}
+
+.family-tree-search .btn {
+    height: 40px;
+}
+
+
+/* =========================================================
+   TREE VIEWPORT
+========================================================= */
+
+.family-tree-wrapper {
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    background:
+        radial-gradient(circle, rgba(148,163,184,.22) 1px, transparent 1px);
+
+    background-size: 22px 22px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: none;
+}
+
+.family-tree-wrapper.is-dragging {
+    cursor: grabbing;
+}
+
+.family-tree-canvas {
+    width: max-content;
+    min-width: 100%;
+
+    transform-origin: top center;
+
+    transition: transform .18s ease;
+}
+
+.family-tree-wrapper.is-dragging
+.family-tree-canvas {
+    transition: none;
+}
+
+
+/* =========================================================
+   FOREST
+========================================================= */
+
+.family-tree-forest {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 90px;
+
+    width: max-content;
+    min-width: 100%;
+
+    padding: 60px 80px 100px;
+}
+
+.family-tree-root {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PROFESSIONAL MEMBER CARD
+========================================================= */
+
+.family-tree-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+.family-tree-card {
+    width: 205px;
+    min-height: 125px;
+
+    background: #fff;
+
+    border: 2px solid #3b82f6;
+
+    border-radius: 16px;
+
+    padding: 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 6px 20px rgba(15,23,42,.08);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+.family-tree-card-link:hover .family-tree-card {
+    transform: translateY(-5px) scale(1.015);
+
+    box-shadow:
+        0 14px 30px rgba(15,23,42,.16);
+}
+
+
+/* =========================================================
+   MALE / FEMALE BORDER
+========================================================= */
+
+.family-tree-card-link:has(.family-tree-gender) {
+    border-radius: 16px;
+}
+
+/* Male */
+
+.family-tree-card:has(.family-tree-gender) {
+    border-color: #3b82f6;
+}
+
+/* Female */
+
+.family-tree-card:has(.family-tree-gender) {
+    border-color: #3b82f6;
+}
+
+
+/*
+   Use gender class from PHP where possible.
+*/
+
+.family-tree-person.gender-male
+.family-tree-card {
+    border-color: #3b82f6;
+}
+
+.family-tree-person.gender-female
+.family-tree-card {
+    border-color: #ec4899;
+}
+
+.family-tree-card.gender-male {
+    border-color: #3b82f6;
+}
+
+.family-tree-card.gender-female {
+    border-color: #ec4899;
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.family-tree-photo {
+    width: 62px;
+    height: 62px;
+    min-width: 62px;
+
+    position: relative;
+}
+
+.family-tree-photo img {
+    width: 62px;
+    height: 62px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid #f8fafc;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.12);
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.family-tree-info {
+    min-width: 0;
+}
+
+.family-tree-relation {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: #64748b;
+
+    letter-spacing: .7px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 4px;
+}
+
+.family-tree-name {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #0f172a;
+
+    line-height: 1.25;
+
+    word-break: break-word;
+}
+
+.family-tree-code {
+    font-size: 10px;
+
+    color: #64748b;
+
+    margin-top: 5px;
+}
+
+.family-tree-gender {
+    font-size: 10px;
+
+    color: #94a3b8;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   SPOUSE
+========================================================= */
+
+.family-tree-spouse-line {
+    width: 35px;
+    height: 2px;
+
+    background: #ec4899;
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+.family-tree-spouse-line span {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: #fff;
+
+    color: #ec4899;
+
+    font-size: 12px;
+
+    padding: 2px 5px;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   GENERATION CONNECTION
+========================================================= */
+
+.family-tree-parent-connector {
+    width: 2px;
+    height: 38px;
+
+    background: #94a3b8;
+
+    margin: 0 auto;
+}
+
+.family-tree-children {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    position: relative;
+
+    padding-top: 38px;
+}
+
+.family-tree-children::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 100px);
+
+    height: 2px;
+
+    background: #94a3b8;
+}
+
+.family-tree-child {
+    position: relative;
+}
+
+.family-tree-child::before {
+    content: "";
+
+    position: absolute;
+
+    top: -38px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 2px;
+
+    height: 38px;
+
+    background: #94a3b8;
+}
+
+
+/* =========================================================
+   DECEASED
+========================================================= */
+
+.family-tree-deceased {
+    position: absolute;
+
+    right: -4px;
+    top: -4px;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #334155;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    border: 2px solid #fff;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.family-tree-empty-state {
+    min-height: 350px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: #64748b;
+}
+
+.family-tree-empty-icon {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 28px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .family-tree-toolbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .family-tree-actions {
+        width: 100%;
+    }
+
+    .family-tree-actions .btn {
+        flex: 1;
+    }
+
+    .family-tree-wrapper {
+        height: 65vh;
+        min-height: 430px;
+    }
+
+    .family-tree-forest {
+        padding: 40px 50px 80px;
+        gap: 50px;
+    }
+
+    .family-tree-card {
+        width: 175px;
+        min-height: 110px;
+        padding: 10px;
+    }
+
+    .family-tree-photo {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+
+    .family-tree-photo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .family-tree-name {
+        font-size: 12px;
+    }
+
+    .family-tree-children {
+        gap: 20px;
+    }
+
+}
+
+
+/* search */
+.family-tree-search-match {
+    animation: familyTreeSearchPulse .45s ease;
+}
+
+@keyframes familyTreeSearchPulse {
+
+    0% {
+        transform: scale(.95);
+        opacity: .5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
+
+/*search*/
+.family-tree-member {
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+.family-tree-search-match {
+    display: block !important;
+    animation: familyTreeSearchMatch .35s ease;
+}
+
+@keyframes familyTreeSearchMatch {
+
+    from {
+        transform: scale(.92);
+        opacity: .4;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}

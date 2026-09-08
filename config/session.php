@@ -1,47 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/constants.php';
 
 /*
 |--------------------------------------------------------------------------
-| Secure Session Configuration
+| SECURE SESSION CONFIGURATION
 |--------------------------------------------------------------------------
 */
 
-ini_set('session.use_only_cookies', 1);
-ini_set('session.use_strict_mode', 1);
-
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path'     => '/',
-    'domain'   => '',
-    'secure'   => false, // Badilisha kuwa true ukitumia HTTPS
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-
 if (session_status() === PHP_SESSION_NONE) {
+
+    ini_set('session.use_only_cookies', '1');
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_trans_sid', '0');
+
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path'     => '/',
+        'domain'   => '',
+        'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
     session_start();
 }
 
 /*
 |--------------------------------------------------------------------------
-| Session Timeout (30 Minutes)
+| SESSION TIMEOUT
 |--------------------------------------------------------------------------
 */
 
-$session_timeout = 1800;
+$sessionTimeout = 1800; // 30 minutes
 
-if (isset($_SESSION['last_activity'])) {
+if (
+    isset($_SESSION['last_activity']) &&
+    (time() - (int) $_SESSION['last_activity']) > $sessionTimeout
+) {
 
-    if ((time() - $_SESSION['last_activity']) > $session_timeout) {
+    $_SESSION = [];
 
-        session_unset();
-        session_destroy();
+    if (ini_get('session.use_cookies')) {
 
-        header("Location: ../login.php");
-        exit;
+        $params = session_get_cookie_params();
+
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $params['path'],
+            $params['domain'],
+            (bool) $params['secure'],
+            (bool) $params['httponly']
+        );
     }
+
+    session_destroy();
+
+    header('Location: ' . BASE_URL . 'login.php?timeout=1');
+    exit;
 }
 
 $_SESSION['last_activity'] = time();

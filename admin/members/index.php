@@ -4,121 +4,638 @@ require_once '../../config/database.php';
 require_once '../../config/constants.php';
 require_once '../../config/auth.php';
 
-requireLogin();
+requireAdministrator();
 
 $database = new Database();
 $pdo = $database->connect();
 
-$stmt = $pdo->query("
-    SELECT
-        user_id,
-        member_code,
-        first_name,
-        middle_name,
-        last_name,
-        gender,
-        phone,
-        email
+$clanId = getCurrentClanId();
+
+/*
+|--------------------------------------------------------------------------
+| Statistics
+|--------------------------------------------------------------------------
+*/
+
+$totalMembers = $pdo->prepare("
+    SELECT COUNT(*)
     FROM users
     WHERE is_deleted = 0
-    ORDER BY user_id DESC
+      AND clan_id = ?
 ");
+$totalMembers->execute([$clanId]);
+$totalMembers = $totalMembers->fetchColumn();
+
+$activeMembers = $pdo->prepare("
+    SELECT COUNT(*)
+    FROM users
+    WHERE is_deleted = 0
+      AND account_status = 'active'
+      AND clan_id = ?
+");
+$activeMembers->execute([$clanId]);
+$activeMembers = $activeMembers->fetchColumn();
+
+$inactiveMembers = $pdo->prepare("
+    SELECT COUNT(*)
+    FROM users
+    WHERE is_deleted = 0
+      AND account_status = 'inactive'
+      AND clan_id = ?
+");
+$inactiveMembers->execute([$clanId]);
+$inactiveMembers = $inactiveMembers->fetchColumn();
+
+$maleMembers = $pdo->prepare("
+    SELECT COUNT(*)
+    FROM users
+    WHERE is_deleted = 0
+      AND gender = 'Male'
+      AND clan_id = ?
+");
+$maleMembers->execute([$clanId]);
+$maleMembers = $maleMembers->fetchColumn();
+
+$femaleMembers = $pdo->prepare("
+    SELECT COUNT(*)
+    FROM users
+    WHERE is_deleted = 0
+      AND gender = 'Female'
+      AND clan_id = ?
+");
+$femaleMembers->execute([$clanId]);
+$femaleMembers = $femaleMembers->fetchColumn();
+
+$deceasedMembers = $pdo->prepare("
+    SELECT COUNT(*)
+    FROM users
+    WHERE is_deleted = 0
+      AND is_deceased = 1
+      AND clan_id = ?
+");
+$deceasedMembers->execute([$clanId]);
+$deceasedMembers = $deceasedMembers->fetchColumn();
+
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+*/
+
+$search = trim($_GET['search'] ?? '');
+
+$sql = "
+    SELECT
+        u.user_id,
+        u.member_code,
+        u.first_name,
+        u.middle_name,
+        u.last_name,
+        u.gender,
+        u.phone,
+        u.email,
+        u.account_status,
+        u.is_deceased,
+        u.created_at,
+        r.role_name
+    FROM users u
+    LEFT JOIN roles r
+        ON r.role_id = u.role_id
+    WHERE u.is_deleted = 0
+      AND u.clan_id = ?
+";
+
+$params = [$clanId];
+
+if ($search !== '') {
+
+    $sql .= "
+        AND (
+            u.member_code LIKE ?
+            OR u.first_name LIKE ?
+            OR u.middle_name LIKE ?
+            OR u.last_name LIKE ?
+            OR u.phone LIKE ?
+            OR u.email LIKE ?
+            OR u.username LIKE ?
+        )
+    ";
+
+    $term = "%{$search}%";
+
+    array_push($params, $term, $term, $term, $term, $term, $term, $term);
+}
+
+$sql .= " ORDER BY u.user_id DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 
 $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard layout
+|--------------------------------------------------------------------------
+*/
+
+require_once '../../includes/dashboard/header.php';
+require_once '../../includes/dashboard/sidebar.php';
+require_once '../../includes/dashboard/navbar.php';
+
 ?>
 
-<!DOCTYPE html>
-<html>
+<div class="content-wrapper">
 
-<head>
+<section class="content">
 
-    <meta charset="UTF-8">
+<div class="container-fluid clan-page-content">
 
-    <title>Members List</title>
+<!-- HEADER -->
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<div class="card clan-page-card">
 
-</head>
+<div class="card-body">
 
-<body>
+<div class="d-flex justify-content-between align-items-center flex-wrap">
 
-<h2>Family Members</h2>
+<div>
 
-<p>
-    <a href="create.php">
-        <i class="fa fa-plus"></i> Add New Member
-    </a>
+<h3 class="mb-1">
+
+<i class="fas fa-users text-primary mr-2"></i>
+
+Member Management
+
+</h3>
+
+<p class="text-muted mb-0">
+
+Manage all clan members and their accounts.
+
 </p>
 
-<table border="1" cellpadding="10" cellspacing="0">
+</div>
 
-    <tr>
+<div class="mt-2 mt-md-0">
 
-        <th>ID</th>
-        <th>Member Code</th>
-        <th>Full Name</th>
-        <th>Gender</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Actions</th>
+<a href="create.php" class="btn btn-primary">
 
-    </tr>
+<i class="fas fa-user-plus mr-1"></i>
 
-    <?php foreach ($members as $member): ?>
+Add Member
 
-    <tr>
+</a>
 
-        <td><?= $member['user_id']; ?></td>
+</div>
 
-        <td><?= htmlspecialchars($member['member_code']); ?></td>
+</div>
 
-        <td>
-            <?= htmlspecialchars(
-                trim(
-                    $member['first_name'] . ' ' .
-                    $member['middle_name'] . ' ' .
-                    $member['last_name']
-                )
-            ); ?>
-        </td>
+</div>
 
-        <td><?= htmlspecialchars($member['gender']); ?></td>
+</div>
 
-        <td><?= htmlspecialchars($member['phone']); ?></td>
 
-        <td><?= htmlspecialchars($member['email']); ?></td>
+<!-- STATISTICS -->
 
-        <td>
+<div class="row">
 
-            <a href="view.php?id=<?= $member['user_id']; ?>" title="View">
-                <i class="fa fa-eye"></i>
-            </a>
+<div class="col-lg-3 col-md-6">
 
-            &nbsp;&nbsp;
+<div class="small-box bg-primary">
 
-            <a href="edit.php?id=<?= $member['user_id']; ?>" title="Edit">
-                <i class="fa fa-pen"></i>
-            </a>
+<div class="inner">
 
-            &nbsp;&nbsp;
+<h3><?= number_format($totalMembers); ?></h3>
 
-            <a href="delete.php?id=<?= $member['user_id']; ?>"
-               onclick="return confirm('Are you sure you want to delete this member?');"
-               title="Delete">
+<p>Total Members</p>
 
-                <i class="fa fa-trash"></i>
+</div>
 
-            </a>
+<div class="icon">
 
-        </td>
+<i class="fas fa-users"></i>
 
-    </tr>
+</div>
 
-    <?php endforeach; ?>
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="small-box bg-success">
+
+<div class="inner">
+
+<h3><?= number_format($activeMembers); ?></h3>
+
+<p>Active Members</p>
+
+</div>
+
+<div class="icon">
+
+<i class="fas fa-user-check"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="small-box bg-warning">
+
+<div class="inner">
+
+<h3><?= number_format($inactiveMembers); ?></h3>
+
+<p>Inactive Members</p>
+
+</div>
+
+<div class="icon">
+
+<i class="fas fa-user-clock"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="small-box bg-danger">
+
+<div class="inner">
+
+<h3><?= number_format($deceasedMembers); ?></h3>
+
+<p>Deceased Members</p>
+
+</div>
+
+<div class="icon">
+
+<i class="fas fa-star"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- GENDER SUMMARY -->
+
+<div class="row">
+
+<div class="col-md-6">
+
+<div class="card clan-page-card">
+
+<div class="card-body">
+
+<h5>
+
+<i class="fas fa-mars text-primary mr-2"></i>
+
+Male Members
+
+</h5>
+
+<h2><?= number_format($maleMembers); ?></h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="card clan-page-card">
+
+<div class="card-body">
+
+<h5>
+
+<i class="fas fa-venus text-danger mr-2"></i>
+
+Female Members
+
+</h5>
+
+<h2><?= number_format($femaleMembers); ?></h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="card clan-page-card">
+
+<div class="card-body">
+
+<form method="GET">
+
+<div class="input-group">
+
+<input
+type="search"
+name="search"
+class="form-control"
+value="<?= htmlspecialchars($search); ?>"
+placeholder="Search member name, code, phone, email..."
+autocomplete="off"
+>
+
+<div class="input-group-append">
+
+<button
+type="submit"
+class="btn btn-primary"
+>
+
+<i class="fas fa-search mr-1"></i>
+
+Search
+
+</button>
+
+<?php if ($search !== ''): ?>
+
+<a
+href="index.php"
+class="btn btn-outline-secondary"
+>
+
+Clear
+
+</a>
+
+<?php endif; ?>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- MEMBERS TABLE -->
+
+<div class="card clan-page-card">
+
+<div class="card-header">
+
+<h3 class="card-title">
+
+<i class="fas fa-list mr-2"></i>
+
+All Members
+
+</h3>
+
+</div>
+
+<div class="card-body table-responsive">
+
+<table
+class="table table-bordered table-hover"
+>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+<th>Member Code</th>
+<th>Full Name</th>
+<th><?= __('gender') ?></th>
+<th><?= __('phone') ?></th>
+<th><?= __('role') ?></th>
+<th><?= __('status') ?></th>
+<th><?= __('created') ?></th>
+<th width="170"><?= __('actions') ?></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<?php if (!empty($members)): ?>
+
+<?php foreach ($members as $index => $member): ?>
+
+<tr>
+
+<td><?= $index + 1; ?></td>
+
+<td>
+
+<strong>
+
+<?= htmlspecialchars($member['member_code']); ?>
+
+</strong>
+
+</td>
+
+<td>
+
+<?= htmlspecialchars(
+
+trim(
+
+$member['first_name'] . ' ' .
+
+$member['middle_name'] . ' ' .
+
+$member['last_name']
+
+)
+
+); ?>
+
+</td>
+
+<td>
+
+<?php if ($member['gender'] === 'Male'): ?>
+
+<span class="badge badge-primary">
+
+Male
+
+</span>
+
+<?php else: ?>
+
+<span class="badge badge-danger">
+
+Female
+
+</span>
+
+<?php endif; ?>
+
+</td>
+
+<td>
+
+<?= htmlspecialchars($member['phone'] ?? ''); ?>
+
+</td>
+
+<td>
+
+<span class="badge badge-info">
+
+<?= htmlspecialchars(
+$member['role_name'] ?? 'Member'
+); ?>
+
+</span>
+
+</td>
+
+<td>
+
+<?php if ($member['account_status'] === 'active'): ?>
+
+<span class="badge badge-success">
+
+Active
+
+</span>
+
+<?php else: ?>
+
+<span class="badge badge-warning">
+
+Inactive
+
+</span>
+
+<?php endif; ?>
+
+</td>
+
+<td>
+
+<?= date(
+'d M Y',
+strtotime($member['created_at'])
+); ?>
+
+</td>
+
+<td>
+
+<a
+href="view.php?id=<?= (int)$member['user_id']; ?>"
+class="btn btn-info btn-sm"
+title="View"
+>
+
+<i class="fas fa-eye"></i>
+
+</a>
+
+<a
+href="edit.php?id=<?= (int)$member['user_id']; ?>"
+class="btn btn-primary btn-sm"
+title="Edit"
+>
+
+<i class="fas fa-edit"></i>
+
+</a>
+
+<a
+href="toggle_status.php?id=<?= (int)$member['user_id']; ?>"
+class="btn btn-warning btn-sm"
+title="Change Status"
+>
+
+<i class="fas fa-power-off"></i>
+
+</a>
+
+<a
+href="delete.php?id=<?= (int)$member['user_id']; ?>"
+class="btn btn-danger btn-sm"
+title="Delete"
+onclick="return confirm('Are you sure you want to delete this member?');"
+>
+
+<i class="fas fa-trash"></i>
+
+</a>
+
+</td>
+
+</tr>
+
+<?php endforeach; ?>
+
+<?php else: ?>
+
+<tr>
+
+<td colspan="9" class="text-center py-4">
+
+<i class="fas fa-users-slash fa-2x text-muted mb-2"></i>
+
+<br>
+
+No members found.
+
+</td>
+
+</tr>
+
+<?php endif; ?>
+
+</tbody>
 
 </table>
 
-</body>
-</html>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<?php
+
+require_once '../../includes/dashboard/footer.php';
+
+?>

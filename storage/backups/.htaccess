@@ -1,0 +1,5 @@
+Options -Indexes
+
+<FilesMatch "\.(sql|sql.gz|zip)$">
+    Require all denied
+</FilesMatch>
