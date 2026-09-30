@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+deployment_backup/
+node_modules/
+vendor/
+storage/logs/
+*.log
+render-db/
+database/*.sql

@@ -16,7 +16,7 @@ define('APP_AUTHOR', 'Iddy Mashimba');
 date_default_timezone_set('Africa/Dar_es_Salaam');
 
 // Base URL
-define('BASE_URL', 'http://localhost/Clan_Management_System/');
+define('BASE_URL', getenv('BASE_URL') ?: 'http://localhost/Clan_Management_System/');
 
 // Upload Directories
 define('UPLOAD_PATH', 'assets/uploads/');

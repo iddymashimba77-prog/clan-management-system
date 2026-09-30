@@ -9,3 +9,6 @@ vender/
 .DS_Store
 
 Thumbs.db
+deployment_backup/
+*.sql
+!render-db/init.sql
